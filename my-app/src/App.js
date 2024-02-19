@@ -12,6 +12,7 @@ import Cooking from "./page/category/cooking";
 import Study from "./page/category/study";
 import BookPage from "./page/bookpage";
 import {  BrowserRouter as Router, Route, Routes  } from "react-router-dom";
+import CategoryPage from "./page/category/categoryPage";
 
 function App() {
     return (
@@ -22,10 +23,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/page/:product_id" element={<BookPage />} />
-                        <Route path="/page/category/cartoon" element={<Comic />} />
-                        <Route path="/page/category/novel" element={<Novel />} />
-                        <Route path="/page/category/Cooking" element={<Cooking />} />
-                        <Route path="/page/category/programming" element={<Study />} />
+                        <Route path="/page/category/:category_name" element={<CategoryPage />} />
                     </Routes>
 
             </div>

@@ -16,40 +16,17 @@ app.get('/', (re, res) => {
     return res.json("backend");
 })
 
-app.get('/category/cartoon', (req, res) => {
-    const sql = "SELECT * FROM product p JOIN category c ON p.category_id = c.category_id WHERE category_name = 'Cartoon'";
-    db.query(sql, (err, data) => {
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
-
-app.get('/category/programming', (req, res) => {
-    const sql = "SELECT * FROM product p JOIN category c ON p.category_id = c.category_id WHERE category_name = 'Programming'";
-    db.query(sql, (err, data) => {
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
-
-app.get('/category/cooking', (req, res) => {
-    const sql = "SELECT * FROM product p JOIN category c ON p.category_id = c.category_id WHERE category_name = 'Cooking'";
-    db.query(sql, (err, data) => {
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
-
-app.get('/category/novel', (req, res) => {
-    const sql = "SELECT * FROM product p JOIN category c ON p.category_id = c.category_id WHERE category_name = 'novel'";
-    db.query(sql, (err, data) => {
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
 
 app.get('/product', (req, res) => {
     const sql = "SELECT * FROM product p join category c on p.category_id = c.category_id";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.get('/category', (req, res) => {
+    const sql = "SELECT category_name FROM category ";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -9,6 +9,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar() {
 
+  const [data, setData] = useState([])
+  useEffect(() => {
+      fetch('http://localhost:8081/category')
+      .then(res => res.json())
+      .then(data => setData(data))
+      .catch(err => console.log(err));
+  }, [])
+  
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -23,18 +31,15 @@ function NavBar() {
             navbarScroll
           >
             <NavDropdown title="Category" id="navbarScrollingDropdown">
-              <NavDropdown.Item as={CustomLink} to="/page/category/Cartoon">
-                Comic
-              </NavDropdown.Item>
-              <NavDropdown.Item as={CustomLink} to="/page/category/Novel">
-                Novel
-              </NavDropdown.Item>
-              <NavDropdown.Item as={CustomLink} to="/page/category/Cooking">
-                Cooking
-              </NavDropdown.Item>
-              <NavDropdown.Item as={CustomLink} to="/page/category/Programming">
-                Study
-              </NavDropdown.Item>
+              {data.map(category => (
+                <NavDropdown.Item
+                  key={category.category_name}
+                  as={CustomLink}
+                  to={`/page/category/${category.category_name}`}
+                >
+                  {category.category_name}
+                </NavDropdown.Item>
+              ))}
             </NavDropdown>
             <Nav.Link as={Link} to="#">
               Link
