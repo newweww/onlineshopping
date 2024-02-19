@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
-function Home() {
+function Study() {
 
     const [data, setData] = useState([])
     useEffect(() => {
-        fetch('http://localhost:8081/hot_product')
+        fetch('http://localhost:8081/category/programming')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
@@ -28,11 +27,10 @@ function Home() {
         marginTop: 'auto',
     };
 
-
     return(
         <div className="container">
-            <img src="assets/img1.jpg" className="rounded mx-auto d-block img-fluid highlight_img " alt="img1" />
-            <h2 className="text-start container-fluid p-3">HOT!!!!</h2>
+            <h1 className="text-start">Study</h1>
+            <div className="container">
             
             {/* Displaying data dynamically in cards */}
             <div style={cardContainerStyle}>
@@ -56,7 +54,8 @@ function Home() {
                 ))}
             </div>
         </div>
+    </div>
     );
 }
 
-export default Home;
+export default Study;

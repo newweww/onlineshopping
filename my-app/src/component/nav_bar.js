@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar() {
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -22,16 +23,16 @@ function NavBar() {
             navbarScroll
           >
             <NavDropdown title="Category" id="navbarScrollingDropdown">
-              <NavDropdown.Item as={CustomLink} to="/page/comic">
+              <NavDropdown.Item as={CustomLink} to="/page/category/Cartoon">
                 Comic
               </NavDropdown.Item>
-              <NavDropdown.Item as={CustomLink} to="/page/novel">
+              <NavDropdown.Item as={CustomLink} to="/page/category/Novel">
                 Novel
               </NavDropdown.Item>
-              <NavDropdown.Item as={CustomLink} to="/page/cooking">
+              <NavDropdown.Item as={CustomLink} to="/page/category/Cooking">
                 Cooking
               </NavDropdown.Item>
-              <NavDropdown.Item as={CustomLink} to="/page/study">
+              <NavDropdown.Item as={CustomLink} to="/page/category/Programming">
                 Study
               </NavDropdown.Item>
             </NavDropdown>
