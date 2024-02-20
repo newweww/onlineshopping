@@ -19,17 +19,6 @@ class Product {
       }
     }
   
-    static async getProductById(productId) {
-      try {
-        const response = await fetch(`http://localhost:8081/product/${productId}`);
-        const productData = await response.json();
-        return new Product(productData.product_id, productData.name, productData.category_name, productData.price, productData.stock);
-      } catch (error) {
-        console.error(`Error fetching product with ID ${productId}:`, error);
-        throw error;
-      }
-    }
-  
     async save() {
       try {
         const response = await fetch('http://localhost:8081/product', {
