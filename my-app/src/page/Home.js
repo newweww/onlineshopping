@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Card from "../component/card";
 
 
 function Home() {
@@ -37,22 +37,7 @@ function Home() {
             {/* Displaying data dynamically in cards */}
             <div style={cardContainerStyle}>
                 {data.map((item, index) => (
-                    <div className="card inline mx-4" style={cardStyle} key={index}>
-                        <img
-                            className="card-img-top card_img"
-                            src="/assets/img1.jpg"
-                            alt=""
-                        />
-                        <div className="card-body" style={{ flex: '1' }}>
-                            <h5 className="card-title">{item.name}</h5>
-                            <p className="card-text">{item.category_name}</p>
-                        </div>
-                        <div style={{ alignSelf: 'flex-end' }}>
-                            <Link to={`/page/${item.product_id}`} className="btn btn-primary mx-2 my-2">
-                                More
-                            </Link>
-                        </div>
-                    </div>
+                    <Card key={index} item={item} />
                 ))}
             </div>
         </div>
