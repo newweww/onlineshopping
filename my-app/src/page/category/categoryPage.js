@@ -31,22 +31,14 @@ function CategoryPage() {
         marginTop: '20px',
     };
 
-    const cardStyle = {
-        width: 600,
-        display: 'flex',
-        flexDirection: 'column',
-    };
-
     return (
         <div className="container">
             <h2 className="text-start container-fluid p-3">{category_name}</h2>
-            
-            {/* Displaying data dynamically in cards */}
-            <div style={cardContainerStyle}>
-                {data.map((item, index) => (
-                    <Card key={index} item={item} />
-                ))}
-            </div>
+                <div style={cardContainerStyle}>
+                    {data.map((item, index) => (
+                        <Card key={index} item={item} />
+                    ))}
+                </div>
         </div>
     );
 }
