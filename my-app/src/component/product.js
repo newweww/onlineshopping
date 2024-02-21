@@ -10,7 +10,7 @@ class Product {
   
     static async getAllProducts() {
       try {
-        const response = await fetch('http://localhost:8081/product'); 
+        const response = await fetch('http://localhost:8081/product'); // Corrected endpoint
         const products = await response.json();
         return products.map(productData => new Product(productData.product_id, productData.name, productData.category_name, productData.price, productData.stock));
       } catch (error) {

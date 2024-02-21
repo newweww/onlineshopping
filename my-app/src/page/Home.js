@@ -18,10 +18,23 @@ function Home() {
         marginTop: '20px',
     };
 
+    const cardStyle = {
+        width: 600,
+        display: 'flex',
+        flexDirection: 'column',
+    };
+
+    const buttonContainerStyle = {
+        marginTop: 'auto',
+    };
+
+
     return(
         <div className="container">
             <img src="assets/img1.jpg" className="rounded mx-auto d-block img-fluid highlight_img " alt="img1" />
             <h2 className="text-start container-fluid p-3">HOT!!!!</h2>
+            
+            {/* Displaying data dynamically in cards */}
             <div style={cardContainerStyle}>
                 {data.map((item, index) => (
                     <Card key={index} item={item} />
