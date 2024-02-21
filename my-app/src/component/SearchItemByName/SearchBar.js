@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import './SearchBar.css'
 import Product from '../product';
 
+
 function SearchBar({ setResults }) {
     const [input, setinput] = useState("");
 

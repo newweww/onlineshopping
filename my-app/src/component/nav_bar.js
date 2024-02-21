@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import ProductList from "../page/ProductManage/ProductList";
 
 function NavBar() {
 
@@ -41,8 +42,8 @@ function NavBar() {
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
-            <Nav.Link as={Link} to="#">
-              Link
+            <Nav.Link as={Link} to="/ProductList">
+              Manage
             </Nav.Link>
             <Nav.Link as={Link} to="#">
               Link
