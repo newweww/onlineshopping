@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa'
+import { useParams } from 'react-router-dom'; 
 import './SearchBar.css'
+import Product from '../product';
 
 function SearchBar({ setResults }) {
     const [input, setinput] = useState("");
 
-    const fetchData = (value) => {
-        fetch("http://localhost:8081/product")
-        .then((response) => response.json())
-        .then((json) => {
-            const results = json.filter((product) => {
-                return value && product && product.name && product.name.toLowerCase().includes(value)
-            });
-            setResults(results);
-        })
-    };
+    const fetchData = async (value) => {
+        const getProduct = await Product.getAllProducts();
+        const results = getProduct.filter((Product) => {
+          return value && Product && Product.name && Product.name.toLowerCase().includes(value);
+        });
+        setResults(results);
+      };
 
     const handleChange = (value) => {
         setinput(value);
