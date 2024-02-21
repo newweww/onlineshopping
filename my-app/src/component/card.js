@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Card({ item }) {
+    
   const cardStyle = {
     width: 600,
     display: 'flex',
@@ -13,7 +14,7 @@ function Card({ item }) {
     <div className="card inline mx-4" style={cardStyle}>
       <img
         className="card-img-top card_img"
-        src="/assets/img1.jpg"  // You might want to use item-specific images here
+        src="/assets/img1.jpg" 
         alt=""
       />
       <div className="card-body" style={{ flex: '1' }}>
