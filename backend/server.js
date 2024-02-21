@@ -50,7 +50,7 @@ app.get("/page/category/:category_name", (req, res) => {
 });
 
 app.get('/hot_product', (req, res) => {
-    const sql = "SELECT p.product_id, p.name, c.category_name FROM product p join category c on p.category_id = c.category_id order by name LIMIT 3";
+    const sql = "SELECT * FROM product p join category c on p.category_id = c.category_id order by name LIMIT 3";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);

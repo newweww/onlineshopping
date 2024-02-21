@@ -9,8 +9,8 @@ import Home from "./page/Home";
 import BookPage from "./page/bookpage";
 import {  BrowserRouter as Router, Route, Routes  } from "react-router-dom";
 import CategoryPage from "./page/category/categoryPage";
-import SearchBar from "./component/search/SearchBar";
-import SearchResultList from "./component/search/SearchResultList";
+import SearchBar from "./component/SearchItemByName/SearchBar";
+import SearchResultList from "./component/SearchItemByName/SearchResultList";
 
 
 function App() {

@@ -20,6 +20,8 @@ function Card({ item }) {
       <div className="card-body" style={{ flex: '1' }}>
         <h5 className="card-title">{item.name}</h5>
         <p className="card-text">{item.category_name}</p>
+        <p>Stock: {item.stock}</p>
+        <p>Price: {item.price}</p>
       </div>
       <div style={{ alignSelf: 'flex-end' }}>
         <Link to={`/page/${item.product_id}`} className="btn btn-primary mx-2 my-2">
