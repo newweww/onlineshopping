@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Product from "../component/product";
+import axios from "axios";
 
 function BookPage() {
     const { product_id } = useParams();
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const productData = await Product.getProductById(product_id);
-                setData(productData);
+                const response = await axios.get(`http://localhost:8081/getproductbyid/${product_id}`);
+                const productData = response.data;
+
+                if (productData) {
+                    setData(productData);
+                } else {
+                    console.error(`Product with ID ${product_id} not found.`);
+                }
             } catch (error) {
-                console.error(`Error fetching product with ID ${product_id}:`, error);
+                console.error('Error fetching product:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchData();
     }, [product_id]);
 
-    if (!data) {
+    if (loading) {
         return <div>Loading...</div>;
+    }
+
+    if (!data) {
+        return <div>Product not found</div>;
     }
 
     return (

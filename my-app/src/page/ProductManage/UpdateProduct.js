@@ -30,17 +30,26 @@ const UpdateProduct = () => {
     axios
       .get("http://localhost:8081/getproductbyid/" + product_id)
       .then((res) => {
-        const productData = res.data[0];
-        console.log("Fetched Data:", productData);
-        setValues({
-          name: productData.name,
-          category_id: productData.category_id,
-          price: productData.price,
-          stock: productData.stock
-        });
+        console.log("API Response:", res);
+  
+        const productData = res.data;  // Access the data directly
+  
+        if (productData) {
+          setValues({
+            name: productData.name || "",
+            category_id: productData.category_id || "",
+            price: productData.price || "",
+            stock: productData.stock || ""
+          });
+        } else {
+          console.log("Product data not available");
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Error fetching data:", err));
   }, [product_id]);
+  
+  
+  
 
   return (
     <div className='d-flex align-item-center flex-column mt-3'>

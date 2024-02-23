@@ -14,6 +14,7 @@ import SearchResultList from "./component/SearchItemByName/SearchResultList";
 import ProductList from "./page/ProductManage/ProductList";
 import CreateProduct from "./page/ProductManage/CreateProduct";
 import UpdateProduct from "./page/ProductManage/UpdateProduct";
+import Login from "./component/login.js";
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
                         <Route path="/productlist" element={<ProductList />}/>
                         <Route path="/create" element={<CreateProduct />}/>
                         <Route path="/update/:product_id" element={<UpdateProduct />}/>
-
+                        <Route path="/login" element={<Login />}/>
                     </Routes>
 
             </div>

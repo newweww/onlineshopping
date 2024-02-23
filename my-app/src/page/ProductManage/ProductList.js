@@ -18,9 +18,11 @@ const ProductList = () => {
   }, [])
 
   const handleDelete = (product_id) => {
-    axios.delete('http://localhost:8081/delete/' + product_id)
-    .then(res => window.location.reload())
-    .catch(err => console.log(err))
+    axios.delete(`http://localhost:8081/delete/${product_id}`)
+      .then(res => {
+        setData(data.filter(product => product.product_id !== product_id));
+      })
+      .catch(err => console.log(err));
   }
 
   return (
