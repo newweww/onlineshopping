@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import ProductList from "../page/ProductManage/ProductList";
+import ProductList from "../admin/ProductManage/ProductList";
 
 function NavBar() {
 
@@ -21,7 +21,7 @@ function NavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand as={CustomLink} to="/">
+        <Navbar.Brand as={CustomLink} to="/l/home">
           Home
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -36,7 +36,7 @@ function NavBar() {
                 <NavDropdown.Item
                   key={category.category_name}
                   as={CustomLink}
-                  to={`/page/category/${category.category_name}`}
+                  to={`/l/page/category/${category.category_name}`}
                 >
                   {category.category_name}
                 </NavDropdown.Item>

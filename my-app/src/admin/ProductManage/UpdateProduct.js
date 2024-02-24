@@ -16,7 +16,7 @@ const UpdateProduct = () => {
     e.preventDefault();
   
     axios.put('http://localhost:8081/update/' + product_id, values)
-      .then(res => navigate('/productlist'))
+      .then(res => navigate('/dashboard/productlist'))
       .catch(err => {
         if (err.response && err.response.status === 400) {
           console.log("Validation error:", err.response.data.error);

@@ -1,4 +1,3 @@
-
 import "./App.css";
 import React, { Componen, useState } from "react";
 import Header from "./component/header";
@@ -7,14 +6,20 @@ import Footer from "./component/footer";
 import "./css/bootstrap.min.css";
 import Home from "./page/Home";
 import BookPage from "./page/bookpage";
-import {  BrowserRouter as Router, Route, Routes  } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CategoryPage from "./page/category/categoryPage";
 import SearchBar from "./component/SearchItemByName/SearchBar";
 import SearchResultList from "./component/SearchItemByName/SearchResultList";
-import ProductList from "./page/ProductManage/ProductList";
-import CreateProduct from "./page/ProductManage/CreateProduct";
-import UpdateProduct from "./page/ProductManage/UpdateProduct";
+import ProductList from "./admin/ProductManage/ProductList.js";
+import CreateProduct from "./admin/ProductManage/CreateProduct.js";
+import UpdateProduct from "./admin/ProductManage/UpdateProduct.js";
 import Login from "./component/login.js";
+import Dashboard from "./admin/component/Dashboard.js";
+import DashboardHome from "./admin/component/Home.js";
+import Layout from "./component/layout.js";
+import Employee from "./admin/component/Employee.js";
+import Category from "./admin/component/Category.js";
+import Profile from "./admin/component/Profile.js";
 
 
 function App() {
@@ -23,23 +28,33 @@ function App() {
 
     return (
         <div className='App'>
-            <Header />
-            <NavBar />
-            <SearchBar setResults={setResults}/>
-            <SearchResultList results={results}/>
-            <div className="container">
+            <div>
+                <div>
+                    <Header />
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/page/:product_id" element={<BookPage />} />
-                        <Route path="/page/category/:category_name" element={<CategoryPage />} />
-                        <Route path="/productlist" element={<ProductList />}/>
-                        <Route path="/create" element={<CreateProduct />}/>
-                        <Route path="/update/:product_id" element={<UpdateProduct />}/>
-                        <Route path="/login" element={<Login />}/>
+                        <Route path="/login" element={<Login />} />
                     </Routes>
-
+                    <Routes>
+                        <Route path="/l" element={<Layout />}>
+                            <Route path="/l/home" element={<Home />} />
+                            <Route path="/l/page/:product_id" element={<BookPage />} />
+                            <Route path="/l/page/category/:category_name" element={<CategoryPage />} />
+                        </Route>
+                    </Routes>
+                    <Routes>
+                        <Route path="/dashboard" element={<Dashboard />}>
+                            <Route path="" element={<DashboardHome />} />
+                            <Route path="/dashboard/employee" element={<Employee />} />
+                            <Route path="/dashboard/category" element={<Category />} />
+                            <Route path="/dashboard/profile" element={<Profile />} />
+                            <Route path="/dashboard/productlist" element={<ProductList />} />
+                            <Route path="/dashboard/create" element={<CreateProduct />} />
+                            <Route path="/dashboard/update/:product_id" element={<UpdateProduct />} />
+                        </Route>
+                    </Routes>
+                </div>
+                <Footer />
             </div>
-            <Footer />
         </div>
     );
 }

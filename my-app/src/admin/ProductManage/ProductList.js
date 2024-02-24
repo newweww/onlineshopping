@@ -27,7 +27,7 @@ const ProductList = () => {
 
   return (
     <div className='container mt-5'>
-      <Link to="/create" className="btn btn-success" >Add Book</Link>
+      <Link to="/dashboard/create" className="btn btn-success" >Add Book</Link>
       {data.length !== 0 ?
         <table class="table">
           <thead>
@@ -49,9 +49,8 @@ const ProductList = () => {
                   <td>{product.price}</td>
                   <td>{product.stock}</td>
                   <td>
-                    <Link to={`/update/${product.product_id}`} className='btn btn-info btn-sm me-2 '>Update</Link>
+                    <Link to={`/dashboard/update/${product.product_id}`} className='btn btn-info btn-sm me-2 '>Update</Link>
                     <button type='button' onClick={() => handleDelete(product.product_id)} className='btn btn-danger btn-sm'>Delete</button>
-
                   </td>
                 </tr>
               )

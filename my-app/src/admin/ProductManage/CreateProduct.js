@@ -15,7 +15,7 @@ const CreateProduct = () => {
     e.preventDefault();
   
     axios.post('http://localhost:8081/create', values)
-      .then(res => navigate('/productlist'))
+      .then(res => navigate('/dashboard/productlist'))
       .catch(err => {
         if (err.response && err.response.status === 400) {
           console.log("Validation error:", err.response.data.error);

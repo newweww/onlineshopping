@@ -14,7 +14,11 @@ import { deleteproduct } from "./ProductManage/DeleteProduct.js";
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}))
 app.use(express.json());
 
 app.get('/', (re, res) => {
