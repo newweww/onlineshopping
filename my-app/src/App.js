@@ -21,6 +21,8 @@ import Employee from "./admin/component/Employee.js";
 import Category from "./admin/component/Category.js";
 import Profile from "./admin/component/Profile.js";
 import AddCategory from "./admin/component/AddCategory.js";
+import AddEmployee from "./admin/component/AddEmployee.js";
+import UpdateEmployee from "./admin/component/UpdateEmployee.js";
 
 
 function App() {
@@ -29,7 +31,7 @@ function App() {
 
     return (
         <div className='App'>
-            <div className="align-items-center">
+            <div>
                     <Header />
                     <Routes>
                         <Route path="/" element={<Login />} />
@@ -45,6 +47,8 @@ function App() {
                         <Route path="/dashboard" element={<Dashboard />}>
                             <Route path="" element={<DashboardHome />} />
                             <Route path="/dashboard/employee" element={<Employee />} />
+                            <Route path="/dashboard/add_employee" element={<AddEmployee />} />
+                            <Route path="/dashboard/update_employee" element={<UpdateEmployee />} />
                             <Route path="/dashboard/category" element={<Category />} />
                             <Route path="/dashboard/add_category" element={<AddCategory />} />
                             <Route path="/dashboard/profile" element={<Profile />} />

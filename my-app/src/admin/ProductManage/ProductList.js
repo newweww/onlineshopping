@@ -35,6 +35,7 @@ const ProductList = () => {
           <thead>
             <tr>
               <th scope="col">#</th>
+              <th scope="col">image</th>
               <th scope="col">name</th>
               <th scope="col">Category</th>
               <th scope="col">Price</th>
@@ -46,6 +47,7 @@ const ProductList = () => {
               data.map(product =>
                 <tr key={product.product_id}>
                   <td>{product.product_id}</td>
+                  <td>{product.image}</td>
                   <td>{product.name}</td>
                   <td>{product.category_name}</td>
                   <td>{product.price}</td>

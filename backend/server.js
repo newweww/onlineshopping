@@ -11,6 +11,8 @@ import { create } from "./ProductManage/CreateProduct.js";
 import { update } from "./ProductManage/UpdateProduct.js";
 import { deleteproduct } from "./ProductManage/DeleteProduct.js";
 import { addcategory } from "./Routes/AddCategory.js";
+import { addemployee } from "./Routes/AddEmployee.js";
+import { image } from "./Routes/Image.js";
 
 
 const app = express()
@@ -20,11 +22,27 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }))
-app.use(express.json());
+
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.static('Public'))
 
 app.get('/', (re, res) => {
     return res.json("backend");
 })
+
+app.get('/image', async (req, res) => {
+    try {
+      const connection = await db.getConnection();
+      const [rows, fields] = await connection.execute('SELECT image FROM product');
+      connection.release();
+  
+      res.render('image', { images: rows });
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
 app.get('/hot_product', (req, res) => {
     const sql = "SELECT * FROM product p join category c on p.category_id = c.category_id order by name LIMIT 3";
@@ -43,6 +61,8 @@ app.use('/create', create);
 app.use('/', update);
 app.use('/', deleteproduct );
 app.use('/addcategory', addcategory)
+app.use('/addemployee' , addemployee)
+app.use('/', image)
 
 
 

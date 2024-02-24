@@ -8,7 +8,8 @@ const CreateProduct = () => {
     name: "",
     category_id: "",
     price: "",
-    stock: ""
+    stock: "",
+    image: null
   });
 
   const [categories, setCategories] = useState([]);
@@ -24,7 +25,14 @@ const CreateProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:8081/create', values)
+    const formData = new FormData();
+        formData.append('name', values.name);
+        formData.append('category_id', values.category_id);
+        formData.append('price', values.price);
+        formData.append('stock', values.stock);
+        formData.append('image', image);
+
+    axios.post('http://localhost:8081/create', formData)
       .then(res => navigate('/dashboard/productlist'))
       .catch(err => {
         if (err.response && err.response.status === 400) {
@@ -33,6 +41,13 @@ const CreateProduct = () => {
           console.error("Server error:", err.message);
         }
       });
+  };
+
+  const [image, setImage] = useState('')
+  const handleImageChange = (e) => {
+      console.log(e.target.files[0]);
+      setImage(e.target.files[0]);
+      setValues({ ...values, image: e.target.files[0] });
   };
 
   return (
@@ -66,6 +81,10 @@ const CreateProduct = () => {
           <label for="stock" class="form-label">Stock:</label >
           <input type="stock" class="form-control" id="stock" placeholder="Enter stock" name="stock" onChange={(e) => setValues({ ...values, stock: e.target.value })} />
         </div>
+        <div class="mb-3 mt-3">
+                        <label for="image" class="form-label">Select Image:</label>
+                        <input type="file" class="form-control" id="image" onChange={handleImageChange} name="image" />
+                    </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
