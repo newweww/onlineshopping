@@ -10,6 +10,7 @@ import { pfi } from "./Routes/getProductById.js";
 import { create } from "./ProductManage/CreateProduct.js";
 import { update } from "./ProductManage/UpdateProduct.js";
 import { deleteproduct } from "./ProductManage/DeleteProduct.js";
+import { addcategory } from "./Routes/AddCategory.js";
 
 
 const app = express()
@@ -41,6 +42,8 @@ app.use('/', pfi);
 app.use('/create', create);
 app.use('/', update);
 app.use('/', deleteproduct );
+app.use('/addcategory', addcategory)
+
 
 
 

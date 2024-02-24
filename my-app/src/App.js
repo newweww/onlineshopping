@@ -20,6 +20,7 @@ import Layout from "./component/layout.js";
 import Employee from "./admin/component/Employee.js";
 import Category from "./admin/component/Category.js";
 import Profile from "./admin/component/Profile.js";
+import AddCategory from "./admin/component/AddCategory.js";
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
                 <div>
                     <Header />
                     <Routes>
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/" element={<Login />} />
                     </Routes>
                     <Routes>
                         <Route path="/l" element={<Layout />}>
@@ -46,6 +47,7 @@ function App() {
                             <Route path="" element={<DashboardHome />} />
                             <Route path="/dashboard/employee" element={<Employee />} />
                             <Route path="/dashboard/category" element={<Category />} />
+                            <Route path="/dashboard/add_category" element={<AddCategory />} />
                             <Route path="/dashboard/profile" element={<Profile />} />
                             <Route path="/dashboard/productlist" element={<ProductList />} />
                             <Route path="/dashboard/create" element={<CreateProduct />} />
@@ -60,4 +62,4 @@ function App() {
 }
 
 
-export default App;
+export default App

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 
@@ -10,10 +10,20 @@ const CreateProduct = () => {
     price: "",
     stock: ""
   });
-  
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    // Fetch categories data from the API
+    fetch('http://localhost:8081/category')
+      .then(res => res.json())
+      .then(data => setCategories(data))
+      .catch(err => console.log(err));
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     axios.post('http://localhost:8081/create', values)
       .then(res => navigate('/dashboard/productlist'))
       .catch(err => {
@@ -33,9 +43,20 @@ const CreateProduct = () => {
           <label for="name" class="form-label">Name:</label>
           <input type="text" class="form-control" id="name" placeholder="Enter Product Name" name="Name" onChange={(e) => setValues({ ...values, name: e.target.value })} />
         </div>
-        <div class="mb-3">
-          <label for="category_id" class="form-label">Category:</label >
-          <input type="category_id" class="form-control" id="category_id" placeholder="Enter category_id" name="category_id" onChange={(e) => setValues({ ...values, category_id: e.target.value })} />
+        <div className="mb-3">
+          <label htmlFor="category_id" className="form-label">Category:</label>
+          <select
+            className="form-select"
+            id="category_id"
+            name="category_id"
+            value={values.category_id} 
+            onChange={(e) => setValues({ ...values, category_id: e.target.value })} 
+          >
+            <option value="" disabled>Select category</option>
+            {categories.map(category => (
+              <option key={category.category_id} value={category.category_id}>{category.category_name}</option>
+            ))}
+          </select>
         </div>
         <div class="mb-3">
           <label for="price" class="form-label">Price:</label >
