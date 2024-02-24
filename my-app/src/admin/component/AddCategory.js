@@ -23,9 +23,9 @@ const Category = () => {
     };
   
     return (
-      <div className='d-flex align-item-center flex-column mt-3'>
+      <div className='d-flex align-items-center justify-content-top flex-column vh-100 mt-4'>
         <h1>Add Category</h1>
-        <form className='w-50' onSubmit={handleSubmit}>
+        <form className='w-50 ' onSubmit={handleSubmit}>
           <div class="mb-3 mt-3">
             <label for="category_name" class="form-label">category_name:</label>
             <input type="text" class="form-control" id="category_name" placeholder="Enter Category Name" name="category_name" onChange={(e) => setValues({ ...values, category_name: e.target.value })} />

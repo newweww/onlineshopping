@@ -26,8 +26,10 @@ const ProductList = () => {
   }
 
   return (
-    <div className='container mt-5'>
+    <div className='container mt-5 '>
+      <div className='d-flex justify-content-between'>
       <Link to="/dashboard/create" className="btn btn-success" >Add Book</Link>
+      </div>
       {data.length !== 0 ?
         <table class="table">
           <thead>

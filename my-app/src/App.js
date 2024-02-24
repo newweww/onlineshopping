@@ -29,8 +29,7 @@ function App() {
 
     return (
         <div className='App'>
-            <div>
-                <div>
+            <div className="align-items-center">
                     <Header />
                     <Routes>
                         <Route path="/" element={<Login />} />
@@ -56,7 +55,6 @@ function App() {
                     </Routes>
                 </div>
                 <Footer />
-            </div>
         </div>
     );
 }
