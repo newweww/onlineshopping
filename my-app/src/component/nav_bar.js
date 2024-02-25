@@ -48,8 +48,8 @@ function NavBar() {
             <Nav.Link as={Link} to="#">
               Link
             </Nav.Link>
-            <Nav.Link as={Link} to="#">
-              Link
+            <Nav.Link as={Link} to="/">
+              Louout
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
