@@ -8,7 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import ProductList from "../admin/ProductManage/ProductList";
 
-function NavBar() {
+function NavBar({ handleLogout }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
@@ -48,13 +48,14 @@ function NavBar() {
             <Nav.Link as={Link} to="#">
               Link
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} onClick={handleLogout}>
               Louout
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    
   );
 }
 

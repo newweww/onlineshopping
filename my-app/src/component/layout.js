@@ -4,13 +4,14 @@ import SearchBar from './SearchItemByName/SearchBar'
 import SearchResultList from './SearchItemByName/SearchResultList'
 import { Outlet } from 'react-router-dom'
 
-const Layout = () => {
+const Layout = ({handleLogout}) => {
+
 
     const [results, setResults] = useState([]);
 
     return (
         <div className='container-fluid'>
-            <NavBar />
+            <NavBar handleLogout={handleLogout} />
             <SearchBar setResults={setResults} />
             <SearchResultList results={results} />
             <Outlet />

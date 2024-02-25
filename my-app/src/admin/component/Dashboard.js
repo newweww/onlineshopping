@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import "bootstrap-icons/font/bootstrap-icons.css"
+import "./Dashboard.css";
 
 const Dashboard = () => {
+
+    const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+
+    const handleLogout = () => {
+        setShowLogoutPopup(true);
+    };
+
+    const handleConfirmLogout = () => {
+        window.location.href = "/";
+    };
+
+    const handleClosePopup = () => {
+        setShowLogoutPopup(false);
+    };
+
     return (
         <div className='container-fluid'>
             <div className='row flex-nowrap '>
@@ -45,7 +61,7 @@ const Dashboard = () => {
                                 </Link>
                             </li>
                             <li className='w-100'>
-                                <Link to="/" className='nav-link px-0 align-middle text-white'>
+                                <Link className='nav-link px-0 align-middle text-white' onClick={handleLogout}>
                                     <i className='fs-4 bi-power ms-2'></i>
                                     <span className='ms-2 d-none d-sm-inline'>Logout</span>
                                 </Link>
@@ -59,6 +75,15 @@ const Dashboard = () => {
                     </div>
                     <Outlet />
                 </div>
+                {showLogoutPopup && (
+                    <div className="popup-overlay">
+                        <div className="popup">
+                            <p>Are you sure you want to logout?</p>
+                            <button className='btn btn-success m-3' onClick={handleConfirmLogout}>Yes</button>
+                            <button className='btn btn-danger m-3' onClick={handleClosePopup}>No</button>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
