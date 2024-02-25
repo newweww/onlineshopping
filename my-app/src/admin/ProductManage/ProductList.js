@@ -52,7 +52,7 @@ const ProductList = () => {
                 <td><img
                     src={`http://localhost:8081/images/${product.image}`}
                     alt=""
-                    style={{ maxWidth: '100px', maxHeight: '100px' }} 
+                    className='product_image'
                   /></td>
                 <td>{product.name}</td>
                 <td>{product.category_name}</td>

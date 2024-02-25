@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const ProductList = () => {
+const CategoryList = () => {
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const ProductList = () => {
                                     <td>{category.category_id}</td>
                                     <td>{category.category_name}</td>
                                     <td>
-                                        <Link to={`/dashboard/update/${category.category_id}`} className='btn btn-info btn-sm me-2 '>Update</Link>
+                                        <Link to={`/dashboard/updatecategory/${category.category_id}`} className='btn btn-info btn-sm me-2 '>Update</Link>
                                         <button type='button' onClick={() => handleDelete(category.category_id)} className='btn btn-danger btn-sm'>Delete</button>
                                     </td>
                                 </tr>
@@ -54,4 +54,4 @@ const ProductList = () => {
     )
 }
 
-export default ProductList
+export default CategoryList

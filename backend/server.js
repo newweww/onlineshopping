@@ -19,6 +19,10 @@ import { dirname } from 'path';
 import { employee } from "./Routes/employee.js";
 import { deleteemployee } from "./Routes/DeleteEmployee.js";
 import { deletecateogry } from "./Routes/DeleteCategory.js";
+import { updatecategory } from "./Routes/UpdateCategory.js";
+import { cfi } from "./Routes/getCategoryFromId.js";
+import { efi } from "./Routes/getEmployeeFromId.js";
+import { updateemp } from "./Routes/UpdateEmployee.js";
 
 const app = express()
 const __filename = fileURLToPath(import.meta.url);
@@ -54,7 +58,6 @@ app.get('/hot_product', (req, res) => {
   })
 })
 
-
 app.use('/auth', adminRouter)
 app.use('/product', product)
 app.use('/category', category)
@@ -68,6 +71,10 @@ app.use('/addemployee', addemployee);
 app.use('/employee', employee);
 app.use('/', deleteemployee);
 app.use('/', deletecateogry);
+app.use('/', updatecategory);
+app.use('/', cfi)
+app.use('/', efi)
+app.use('/', updateemp)
 
 app.listen(8081, () => {
   console.log("listenning");

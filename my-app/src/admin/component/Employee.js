@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Product from '../../component/product';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './Dashboard.css'
 
 const Employee = () => {
     const [data, setData] = useState([])
@@ -46,7 +47,7 @@ const Employee = () => {
                   <td><img
                       src={`http://localhost:8081/images/${employee.image}`}
                       alt=""
-                      style={{ maxWidth: '100px', maxHeight: '100px' }} 
+                      className='employee_image' 
                     /></td>
                   <td>{employee.name}</td>
                   <td>{employee.lastname}</td>

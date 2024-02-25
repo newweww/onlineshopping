@@ -23,6 +23,7 @@ import Profile from "./admin/component/Profile.js";
 import AddCategory from "./admin/component/AddCategory.js";
 import AddEmployee from "./admin/component/AddEmployee.js";
 import UpdateEmployee from "./admin/component/UpdateEmployee.js";
+import UpdateCategory from "./admin/component/UpdateCategory.js";
 
 
 function App() {
@@ -62,10 +63,13 @@ function App() {
                         <Route path="" element={<DashboardHome />} />
                         <Route path="/dashboard/employee" element={<Employee />} />
                         <Route path="/dashboard/add_employee" element={<AddEmployee />} />
-                        <Route path="/dashboard/update_employee" element={<UpdateEmployee />} />
+                        <Route path="/dashboard/update_employee/:emp_id" element={<UpdateEmployee />} />
+                        <Route path="/dashboard/profile" element={<Profile />} />
+
                         <Route path="/dashboard/category" element={<Category />} />
                         <Route path="/dashboard/add_category" element={<AddCategory />} />
-                        <Route path="/dashboard/profile" element={<Profile />} />
+                        <Route path="/dashboard/updatecategory/:category_id" element={<UpdateCategory />}/>
+
                         <Route path="/dashboard/productlist" element={<ProductList />} />
                         <Route path="/dashboard/create" element={<CreateProduct />} />
                         <Route path="/dashboard/update/:product_id" element={<UpdateProduct />} />
