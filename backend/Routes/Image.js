@@ -3,7 +3,7 @@ import db from "../utils/db.js";
 
 const image = express()
 
-image.get("/image/:product_id", (req, res) => {
+image.get("/image/:image", (req, res) => {
     const product_id = req.params.product_id;
     // Fetch a specific product from the database
     db.query("SELECT image FROM product WHERE product_id = ?", [product_id], (error, results) => {

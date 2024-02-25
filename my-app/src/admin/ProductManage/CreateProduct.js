@@ -9,7 +9,7 @@ const CreateProduct = () => {
     category_id: "",
     price: "",
     stock: "",
-    image: null
+    image: ""
   });
 
   const [categories, setCategories] = useState([]);
@@ -26,29 +26,20 @@ const CreateProduct = () => {
     e.preventDefault();
 
     const formData = new FormData();
-        formData.append('name', values.name);
-        formData.append('category_id', values.category_id);
-        formData.append('price', values.price);
-        formData.append('stock', values.stock);
-        formData.append('image', image);
+    formData.append('name', values.name);
+    formData.append('category_id', values.category_id);
+    formData.append('price', values.price);
+    formData.append('stock', values.stock);
+    formData.append('image', values.image);
 
     axios.post('http://localhost:8081/create', formData)
       .then(res => navigate('/dashboard/productlist'))
       .catch(err => {
-        if (err.response && err.response.status === 400) {
-          console.log("Validation error:", err.response.data.error);
-        } else {
-          console.error("Server error:", err.message);
-        }
+        console.error("Server error:", err.message);
+        console.log("Server response:", err.response); // Log the response for more details
       });
   };
 
-  const [image, setImage] = useState('')
-  const handleImageChange = (e) => {
-      console.log(e.target.files[0]);
-      setImage(e.target.files[0]);
-      setValues({ ...values, image: e.target.files[0] });
-  };
 
   return (
     <div className='d-flex align-items-center justify-content-top flex-column vh-100 mt-4'>
@@ -64,8 +55,8 @@ const CreateProduct = () => {
             className="form-select"
             id="category_id"
             name="category_id"
-            value={values.category_id} 
-            onChange={(e) => setValues({ ...values, category_id: e.target.value })} 
+            value={values.category_id}
+            onChange={(e) => setValues({ ...values, category_id: e.target.value })}
           >
             <option value="" disabled>Select category</option>
             {categories.map(category => (
@@ -82,9 +73,9 @@ const CreateProduct = () => {
           <input type="stock" class="form-control" id="stock" placeholder="Enter stock" name="stock" onChange={(e) => setValues({ ...values, stock: e.target.value })} />
         </div>
         <div class="mb-3 mt-3">
-                        <label for="image" class="form-label">Select Image:</label>
-                        <input type="file" class="form-control" id="image" onChange={handleImageChange} name="image" />
-                    </div>
+          <label for="image" class="form-label">Select Image:</label>
+          <input type="file" class="form-control" id="imputGroupFile1" name="image" onChange={(e) => setValues({ ...values, image: e.target.files[0] })}  />
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
