@@ -48,7 +48,7 @@ const AddEmployee = () => {
         <div className='d-flex align-items-center justify-content-top flex-column vh-100 mt-4'>
             <div className='border px-5 py-3 d-flex align-items-center justify-content-top flex-column'>
                 <h1>Add Employee</h1>
-                <form className='w-5' onSubmit={handleSubmit}>
+                <form className='w-100' onSubmit={handleSubmit}>
                     <div class="mb-3 mt-3">
                         <label for="emp_name" class="form-label">Name:</label>
                         <input type="text" class="form-control" id="emp_name" placeholder="Enter Name" onChange={(e) => setValues({ ...values, name: e.target.value })} name="emp_name" />

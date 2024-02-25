@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 import "bootstrap-icons/font/bootstrap-icons.css"
 import "./Dashboard.css";
 
@@ -7,13 +8,28 @@ const Dashboard = () => {
 
     const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
+    const navigate = useNavigate();
+    axios.defaults.withCredentials = true
+
     const handleLogout = () => {
         setShowLogoutPopup(true);
     };
 
     const handleConfirmLogout = () => {
-        window.location.href = "/";
+        axios.get('http://localhost:8081/auth/logout')
+        .then(result => {
+            if(result.data.Status) {
+                navigate('/')
+            }
+        })
     };
+
+    const handleProfile = () => {
+        axios.get('http://localhost:8081/auth/protected-route')
+        .then(result => {
+            navigate(`/dashboard/profile/${result.data.email}`)
+        })
+    }
 
     const handleClosePopup = () => {
         setShowLogoutPopup(false);
@@ -26,12 +42,12 @@ const Dashboard = () => {
                     <div className='d- flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100'>
                         <Link to="/dashboard" className='d-flex align-items-center pb-3 mb-md-1 mt-md-3 me-md-auto text-white text-decoration-none'>
                             <span className='fs-5 fw-bolder d-none d-sm-inline'>
-                                NATTANAN
+                                Hello World
                             </span>
                         </Link>
                         <ul className='nav nav-pill flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start' id='menu'>
                             <li className='w-100'>
-                                <Link to='/dashboard' className='nav-link px-0 align-middle text-white'>
+                                <Link to='/dashboard/home' className='nav-link px-0 align-middle text-white'>
                                     <i className='fs-4 bi-speedmeter2 ms-2'></i>
                                     <span className='ms-2 d-none d-sm-inline'>Dashboard</span>
                                 </Link>
@@ -55,7 +71,7 @@ const Dashboard = () => {
                                 </Link>
                             </li>
                             <li className='w-100'>
-                                <Link to='/dashboard/profile' className='nav-link px-0 align-middle text-white'>
+                                <Link onClick={handleProfile} className='nav-link px-0 align-middle text-white'>
                                     <i className='fs-4 bi-person ms-2'></i>
                                     <span className='ms-2 d-none d-sm-inline'>Profile</span>
                                 </Link>

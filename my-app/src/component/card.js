@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "./product";
+import "./style.css"
 
 function Card({ item }) {
   const [data, setData] = useState([]);
@@ -28,17 +29,12 @@ function Card({ item }) {
     alignItems: 'center',
   };
 
-  const imageStyle = {
-    maxWidth: '100%',
-    maxHeight: '100%',
-  };
-
   return (
     <div className="card inline mx-4" style={cardStyle}>
       <img
         src={`http://localhost:8081/images/${item.image}`}
         alt=""
-        style={imageStyle}
+        className=""
       />
       <div className="card-body" style={{ flex: '1' }}>
         <h5 className="card-title">{item.name}</h5>

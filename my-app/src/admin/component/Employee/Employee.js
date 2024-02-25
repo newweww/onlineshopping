@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Product from '../../component/product';
+
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './Dashboard.css'
+import '../Dashboard.css'
 
 const Employee = () => {
     const [data, setData] = useState([])
@@ -25,7 +25,7 @@ const Employee = () => {
     return (
       <div className='container mt-5 '>
         <div className='d-flex justify-content-between'>
-          <Link to="/dashboard/add_employee" className="btn btn-success">Add Book</Link>
+          <Link to="/dashboard/add_employee" className="btn btn-success">Add Employee</Link>
         </div>
         {data.length !== 0 ?
           <table className="table">

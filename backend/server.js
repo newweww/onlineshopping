@@ -3,26 +3,28 @@ import mysql2 from "mysql2";
 import cors from "cors";
 import db from "./utils/db.js";
 import { adminRouter } from "./Routes/AdminRoute.js";
-import { product } from "./Routes/Product.js";
-import { category } from "./Routes/Category.js";
-import { pfc } from "./Routes/getProductFromCategory.js";
-import { pfi } from "./Routes/getProductById.js";
+import { product } from "./ProductManage/Product.js";
+import { category } from "./CategoryAction/Category.js";
+import { pfc } from "./ProductManage/getProductFromCategory.js";
+import { pfi } from "./ProductManage/getProductById.js";
 import { create } from "./ProductManage/CreateProduct.js";
 import { update } from "./ProductManage/UpdateProduct.js";
 import { deleteproduct } from "./ProductManage/DeleteProduct.js";
-import { addcategory } from "./Routes/AddCategory.js";
-import { addemployee } from "./Routes/AddEmployee.js";
+import { addcategory } from "./CategoryAction/AddCategory.js";
+import { addemployee } from "./EmployeeAction/AddEmployee.js";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { employee } from "./Routes/employee.js";
-import { deleteemployee } from "./Routes/DeleteEmployee.js";
-import { deletecateogry } from "./Routes/DeleteCategory.js";
-import { updatecategory } from "./Routes/UpdateCategory.js";
-import { cfi } from "./Routes/getCategoryFromId.js";
-import { efi } from "./Routes/getEmployeeFromId.js";
-import { updateemp } from "./Routes/UpdateEmployee.js";
+import { employee } from "./EmployeeAction/employee.js";
+import { deleteemployee } from "./EmployeeAction/DeleteEmployee.js";
+import { deletecateogry } from "./CategoryAction/DeleteCategory.js";
+import { updatecategory } from "./CategoryAction/UpdateCategory.js";
+import { cfi } from "./CategoryAction/getCategoryFromId.js";
+import { efi } from "./EmployeeAction/getEmployeeFromId.js";
+import { updateemp } from "./EmployeeAction/UpdateEmployee.js";
+import { efe } from "./EmployeeAction/getEmpFromEmail.js";
+import { addcustomer } from "./Routes/Register.js";
 
 const app = express()
 const __filename = fileURLToPath(import.meta.url);
@@ -75,6 +77,8 @@ app.use('/', updatecategory);
 app.use('/', cfi)
 app.use('/', efi)
 app.use('/', updateemp)
+app.use('/', efe)
+app.use('/register', addcustomer)
 
 app.listen(8081, () => {
   console.log("listenning");

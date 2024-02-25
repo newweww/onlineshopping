@@ -36,7 +36,7 @@ const CreateProduct = () => {
       .then(res => navigate('/dashboard/productlist'))
       .catch(err => {
         console.error("Server error:", err.message);
-        console.log("Server response:", err.response); // Log the response for more details
+        console.log("Server response:", err.response); 
       });
   };
 
