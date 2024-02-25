@@ -1,21 +1,44 @@
 // Card.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Product from "./product";
 
 function Card({ item }) {
-    
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productsData = await Product.getAllProducts();
+        console.log(productsData);
+        setData(productsData);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const cardStyle = {
-    width: 600,
+    width: '100%',
+    margin: '0 1%',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+
+  const imageStyle = {
+    maxWidth: '100%',
+    maxHeight: '100%',
   };
 
   return (
     <div className="card inline mx-4" style={cardStyle}>
       <img
-        className="card-img-top card_img"
-        src="/assets/img1.jpg" 
+        src={`http://localhost:8081/images/${item.image}`}
         alt=""
+        style={imageStyle}
       />
       <div className="card-body" style={{ flex: '1' }}>
         <h5 className="card-title">{item.name}</h5>

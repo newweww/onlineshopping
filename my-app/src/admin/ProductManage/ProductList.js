@@ -10,7 +10,7 @@ const ProductList = () => {
     const fetchData = async () => {
       try {
         const productsData = await Product.getAllProducts();
-        console.log(productsData);  // Log the productsData
+        console.log(productsData); 
         setData(productsData);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -49,7 +49,11 @@ const ProductList = () => {
               
               <tr key={product.product_id}>
                 <td>{product.product_id}</td>
-                <td><img src={`http://localhost:8081/images/${product.image}`} alt="" /></td>
+                <td><img
+                    src={`http://localhost:8081/images/${product.image}`}
+                    alt=""
+                    style={{ maxWidth: '100px', maxHeight: '100px' }} 
+                  /></td>
                 <td>{product.name}</td>
                 <td>{product.category_name}</td>
                 <td>{product.price}</td>

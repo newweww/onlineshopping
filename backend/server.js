@@ -12,11 +12,13 @@ import { update } from "./ProductManage/UpdateProduct.js";
 import { deleteproduct } from "./ProductManage/DeleteProduct.js";
 import { addcategory } from "./Routes/AddCategory.js";
 import { addemployee } from "./Routes/AddEmployee.js";
-import { image } from "./Routes/Image.js";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { employee } from "./Routes/employee.js";
+import { deleteemployee } from "./Routes/DeleteEmployee.js";
+import { deletecateogry } from "./Routes/DeleteCategory.js";
 
 const app = express()
 const __filename = fileURLToPath(import.meta.url);
@@ -61,8 +63,11 @@ app.use('/', pfi);
 app.use('/create', create);
 app.use('/', update);
 app.use('/', deleteproduct);
-app.use('/addcategory', addcategory)
-app.use('/addemployee', addemployee)
+app.use('/addcategory', addcategory);
+app.use('/addemployee', addemployee);
+app.use('/employee', employee);
+app.use('/', deleteemployee);
+app.use('/', deletecateogry);
 
 app.listen(8081, () => {
   console.log("listenning");

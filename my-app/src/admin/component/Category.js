@@ -12,10 +12,10 @@ const ProductList = () => {
             .catch(err => console.log(err));
     }, [])
 
-    const handleDelete = (category_name) => {
-        axios.delete(`http://localhost:8081/category`)
+    const handleDelete = (category_id) => {
+        axios.delete(`http://localhost:8081/deletecategory/${category_id}`)
             .then(res => {
-                setData(data.filter(category => category.category_name !== category_name));
+                setData(data.filter(category => category.category_id !== category_id));
             })
             .catch(err => console.log(err));
     }
