@@ -30,7 +30,7 @@ function Card({ item }) {
   };
 
   return (
-    <div className="card inline mx-4" style={cardStyle}>
+    <div className="card inline mx-4 shadow" style={cardStyle}>
       <img
         src={`http://localhost:8081/images/${item.image}`}
         alt=""
