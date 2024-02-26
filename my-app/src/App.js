@@ -23,6 +23,7 @@ import UpdateEmployee from "./admin/component/Employee/UpdateEmployee.js";
 import UpdateCategory from "./admin/component/Category/UpdateCategory.js";
 import Register from "./component/Register.js";
 import axios from "axios";
+import Cart from "./component/Cart.js";
 
 function App() {
 
@@ -64,6 +65,7 @@ function App() {
                         <Route path="/l/home" element={<Home />} />
                         <Route path="/l/page/:product_id" element={<BookPage />} />
                         <Route path="/l/page/category/:category_name" element={<CategoryPage />} />
+                        <Route path="/l/cart" element={<Cart />} />
                     </Route>
                 </Routes>
                 <Routes>

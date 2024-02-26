@@ -25,6 +25,8 @@ import { efi } from "./EmployeeAction/getEmployeeFromId.js";
 import { updateemp } from "./EmployeeAction/UpdateEmployee.js";
 import { efe } from "./EmployeeAction/getEmpFromEmail.js";
 import { addcustomer } from "./Routes/Register.js";
+import { addcart } from "./Routes/AddCart.js";
+import { cart } from "./Routes/getCart.js";
 
 const app = express()
 const __filename = fileURLToPath(import.meta.url);
@@ -79,6 +81,8 @@ app.use('/', efi)
 app.use('/', updateemp)
 app.use('/', efe)
 app.use('/register', addcustomer)
+app.use('/', addcart)
+app.use('/', cart)
 
 app.listen(8081, () => {
   console.log("listenning");

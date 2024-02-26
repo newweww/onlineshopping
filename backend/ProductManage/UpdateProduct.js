@@ -18,4 +18,18 @@ UpdateProduct.put("/update/:product_id", (req, res) => {
       return res.json(data);
     });
   });
+
+  UpdateProduct.post("/stock_update", (req, res) => {
+    const sql = "UPDATE product SET stock = ? WHERE product_id = ?";
+    const values = [
+      req.body.stock,
+      req.body.product_id
+    ];
+
+    db.query(sql, values, (err, data) => {
+      if (err) return res.status(500).json(err); 
+      return res.json(data);
+    });
+});
+
 export { UpdateProduct as update }; 

@@ -12,25 +12,22 @@ function NavBar({ handleLogout }) {
 
   const [data, setData] = useState([])
   useEffect(() => {
-      fetch('http://localhost:8081/category')
+    fetch('http://localhost:8081/category')
       .then(res => res.json())
       .then(data => setData(data))
       .catch(err => console.log(err));
   }, [])
-  
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand as={CustomLink} to="/l/home">
+        <i class="bi bi-house mx-2" s></i>
           Home
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
+          <Nav className="me-2 my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
             <NavDropdown title="Category" id="navbarScrollingDropdown">
               {data.map(category => (
                 <NavDropdown.Item
@@ -45,31 +42,38 @@ function NavBar({ handleLogout }) {
             <Nav.Link as={Link} to="/ProductList">
               Manage
             </Nav.Link>
-            <Nav.Link as={Link} to="#">
-              Link
-            </Nav.Link>
             <Nav.Link as={Link} onClick={handleLogout}>
-              Louout
+              Logout
             </Nav.Link>
           </Nav>
+          <Nav className="ms-auto my-2 my-lg-0">
+            <Nav.Link as={Link} to="/l/cart" style={{ display: 'flex', alignItems: 'center' }}>
+              <i className='fs-4 bi-cart ms-2'></i>
+              <span className='ms-2 d-none d-sm-inline' style={{ fontSize: '20px'}}>Cart</span>
+            </Nav.Link>
+            <Nav.Link as={Link} to="/l/cart" style={{ display: 'flex', alignItems: 'center' }}>
+              <span className='ms-2 d-none d-sm-inline' style={{ fontSize: '20px'}}>Profile</span>
+            </Nav.Link>
+          </Nav>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    
+
   );
 }
 
 function CustomLink({ to, children, ...props }) {
-    const resolvedPath = useResolvedPath(to)
-    const isActive = useMatch({ path: resolvedPath.pathname, end: true})
+  const resolvedPath = useResolvedPath(to)
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true })
 
-    return(
-        <li className={isActive ? "active" : ""}>
-            <Link to={to} {...props}>
-                {children}
-            </Link>
-        </li>
-    );
+  return (
+    <li className={isActive ? "active" : ""}>
+      <Link to={to} {...props}>
+        {children}
+      </Link>
+    </li>
+  );
 }
 
 export default NavBar;

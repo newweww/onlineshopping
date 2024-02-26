@@ -1,4 +1,16 @@
 .product_image {
-    width: 250px;
-    height: 250px;
-  }
+  width: 250px;
+  height: 250px;
+}
+
+.cartimg {
+  width: 60px;
+  height: 60px;
+}
+
+.containerStyle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
