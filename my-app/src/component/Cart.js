@@ -10,6 +10,8 @@ import './style.css';
 function CategoryPage() {
     const [data, setData] = useState(null);
     const [totalPrices, setTotalPrices] = useState(0);
+    const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,10 +28,27 @@ function CategoryPage() {
 
         fetchData();
     }, []);
+    const handleConfirm = () => {
+        if (data && data.length > 0) {
+            setShowConfirmPopup(true);
+        } else {
+            setShowPopup(true);
+        }
+    };
+
+    const handleConfirmOk = () => {
+        setShowPopup(false);
+    }
 
     const handleConfirmBuy = () => {
-        
-    }
+        axios.delete(`http://localhost:8081/deletecart`)
+            .then(window.location.reload())
+            .catch(err => console.log(err));
+    };
+
+    const handleClosePopup = () => {
+        setShowConfirmPopup(false);
+    };
 
     if (!data) {
         return <div>Loading...</div>;
@@ -67,7 +86,7 @@ function CategoryPage() {
                         <div style={{ flex: '20%' }}>
                             <h6>Quantity</h6>
                         </div>
-                        <div style={{ flex: '20%', marginRight: '50px'}}>
+                        <div style={{ flex: '20%', marginRight: '50px' }}>
                             <h6>Total</h6>
                         </div>
                     </div>
@@ -83,10 +102,27 @@ function CategoryPage() {
                 </div>
                 <div className="total-price-container">
                     <h2 style={{ marginRight: '10px' }}>Total Price: {totalPrices}</h2>
-                    <button className="btn btn-success" style={{ fontSize: '20px', width: '300px'}} onClick={handleConfirmBuy}>Confirm</button>
+                    <button className="btn btn-success" style={{ fontSize: '20px', width: '300px' }} onClick={handleConfirm}>Confirm</button>
                 </div>
 
             </div>
+            {showConfirmPopup && (
+                <div className="popup-overlay">
+                    <div className="popup">
+                        <p>Are you sure</p>
+                        <button className='btn btn-success m-3' onClick={handleConfirmBuy}>Yes</button>
+                        <button className='btn btn-danger m-3' onClick={handleClosePopup}>No</button>
+                    </div>
+                </div>
+            )}
+            {showPopup && (
+                <div className="popup-overlay">
+                    <div className="popup">
+                        <p>Please add product</p>
+                        <button className='btn btn-success m-3' onClick={handleConfirmOk}>Yes</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 

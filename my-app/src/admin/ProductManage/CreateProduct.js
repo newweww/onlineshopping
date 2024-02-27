@@ -15,7 +15,6 @@ const CreateProduct = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // Fetch categories data from the API
     fetch('http://localhost:8081/category')
       .then(res => res.json())
       .then(data => setCategories(data))
