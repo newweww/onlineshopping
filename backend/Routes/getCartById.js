@@ -1,11 +1,12 @@
 import express from "express";
 import db from "../utils/db.js";
 
-const getProductById = express()
+const getCartById = express()
 
-getProductById.get("/getproductbyid/:product_id", (req, res) => {
+getCartById.get("/getcartbyid/:product_id", (req, res) => {
   const product_id = req.params.product_id;
-  db.query("SELECT * FROM product p join category c on p.category_id = c.category_id WHERE product_id = ?", [product_id], (error, results) => {
+  // Fetch a specific product from the database
+  db.query("SELECT * FROM cart WHERE product_id = ?", [product_id], (error, results) => {
     if (error) {
       return res.status(500).json({ error: "Internal Server Error" });
     }
@@ -18,4 +19,4 @@ getProductById.get("/getproductbyid/:product_id", (req, res) => {
   });
 });
 
-export { getProductById as pfi }; 
+export { getCartById as cbi }; 

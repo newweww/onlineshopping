@@ -14,3 +14,15 @@
   justify-content: center;
   align-items: center;
 }
+
+.total-price-container {
+  position: fixed;
+  bottom: 35px;
+  left: 74%;
+  width: auto;
+  background-color: white; 
+  padding: 20px;
+  border: 3px solid #ccc;
+  border-radius: 20px;
+}
+

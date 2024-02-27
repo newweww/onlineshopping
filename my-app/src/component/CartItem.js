@@ -11,18 +11,25 @@ function CartItem({ item }) {
                 const response = await axios.get("http://localhost:8081/getcart");
                 const cartData = response.data;
                 setData(cartData);
-                console.log(cartData);
             } catch (error) {
                 console.error('Error fetching cart items:', error);
             }
         };
-
+    
         fetchData();
     }, []);
 
+    const handleDelete = (item_id) => {
+         axios.delete(`http://localhost:8081/deletecartitem/${item_id}`)
+         .then(res => {
+            window.location.reload();
+          })
+          .catch(err => console.log(err));
+    }
+
 
     const cardStyle = {
-        width: '100%',
+        width: '75%',
         height: '80px',
         margin: '0 1%',
         display: 'flex',
@@ -52,6 +59,9 @@ function CartItem({ item }) {
                 </div>
                 <div style={{ flex: '23%' }}>
                     <h5>{item.total_price}</h5>
+                </div>
+                <div>
+                    <button className="btn btn-danger" onClick={() => handleDelete(item.item_id)}>X</button>
                 </div>
             </div>
         </div>

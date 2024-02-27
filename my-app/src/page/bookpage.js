@@ -9,6 +9,11 @@ function BookPage() {
     const [totalSelect, setTotalSelect] = useState(1);
     const [updateStock, setUpdateStock] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [checkData, setCheckData] = useState({
+        quantity: 0,
+        total_price: 0,
+        product_id: 0,
+    });
     const [values, setValues] = useState({
         name: "",
         price: "",
@@ -18,30 +23,41 @@ function BookPage() {
         product_id: "",
     });
 
-    const handlebuy = () => {
-
-        const totalPrice = totalSelect * data.price;
-
-        const cartItem = {
-            name: data.name,
-            price: data.price,
-            quantity: totalSelect,
-            total_price: totalPrice,
-            image: data.image,
-            product_id: data.product_id,
-        };
-
-        axios.post('http://localhost:8081/addcart', cartItem)
-            .then(window.location.reload())
-            .catch(err => {
-                if (err.response && err.response.status === 400) {
-                    console.log("Validation error:", err.response.data.error);
-                } else {
-                    console.error("Server error:", err.message);
-                }
-            });
-    }
-
+    const handlebuy = async () => {
+        try {
+            const totalPrice = totalSelect * data.price;
+    
+            if (data.product_id === checkData.product_id) {
+                const updatedCheckData = {
+                    quantity: checkData.quantity + totalSelect,
+                    total_price: checkData.total_price + totalPrice,
+                };
+    
+                setCheckData(updatedCheckData);
+    
+                await axios.put(`http://localhost:8081/updatecart/${product_id}`, updatedCheckData);
+            } else {
+                const cartItem = {
+                    name: data.name,
+                    price: data.price,
+                    quantity: totalSelect,
+                    total_price: totalPrice,
+                    image: data.image,
+                    product_id: data.product_id,
+                };
+    
+                await axios.post('http://localhost:8081/addcart', cartItem);
+            }
+    
+            window.location.reload();
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                console.log("Validation error:", error.response.data.error);
+            } else {
+                console.error("Server error:", error.message);
+            }
+        }
+    };
     const handleSelectUp = () => {
         if (data && totalSelect < data.stock) {
             setTotalSelect(totalSelect => totalSelect + 1);
@@ -61,6 +77,24 @@ function BookPage() {
             try {
                 const response = await axios.get(`http://localhost:8081/getproductbyid/${product_id}`);
                 const productData = response.data;
+
+                try {
+                    const response2 = await axios.get(`http://localhost:8081/getcartitembyproductid/${product_id}`);
+                    const cartData = response2.data;
+                    setCheckData({
+                        quantity: cartData.quantity,
+                        total_price: cartData.total_price,
+                        product_id: cartData.product_id,});
+                    console.log(checkData);
+                } catch (error) {
+                    console.error('Error fetching cart data:', error);
+                    setCheckData({
+                        quantity: 0,
+                        total_price: 0,
+                        product_id: 0,
+                    });
+                    console.log(checkData);
+                }
 
                 if (productData) {
                     setData(productData);

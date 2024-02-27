@@ -27,6 +27,11 @@ import { efe } from "./EmployeeAction/getEmpFromEmail.js";
 import { addcustomer } from "./Routes/Register.js";
 import { addcart } from "./Routes/AddCart.js";
 import { cart } from "./Routes/getCart.js";
+import { cbi } from "./Routes/getCartItemById.js";
+import { deletecartitem } from "./Routes/DeleteCartItem.js";
+import { totalPrice } from "./Routes/getTotalPrice.js";
+import { cbpi } from "./Routes/getCartbyProductId.js";
+import { updatecart } from "./Routes/updateCart.js";
 
 const app = express()
 const __filename = fileURLToPath(import.meta.url);
@@ -83,6 +88,11 @@ app.use('/', efe)
 app.use('/register', addcustomer)
 app.use('/', addcart)
 app.use('/', cart)
+app.use('/', cbi)
+app.use('/', deletecartitem)
+app.use('/', totalPrice)
+app.use('/', cbpi)
+app.use('/', updatecart)
 
 app.listen(8081, () => {
   console.log("listenning");
