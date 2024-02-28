@@ -12,6 +12,7 @@ function CategoryPage() {
     const [totalPrices, setTotalPrices] = useState(0);
     const [showConfirmPopup, setShowConfirmPopup] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
+    const [customerData, setCustomerData] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,6 +22,16 @@ function CategoryPage() {
                 const totalPrice = response.data.totalPrice;
                 setData(cartData);
                 setTotalPrices(totalPrice);
+
+                axios.get('http://localhost:8081/auth/protected-route')
+                    .then(result => {
+                        return axios.get(`http://localhost:8081/getcustomerfromemail/${result.data.email}`);
+                    })
+                    .then(customerResponse => {
+                        const customerData = customerResponse.data;
+                        setCustomerData(customerData);
+                        console.log(customerData)
+                    })
             } catch (error) {
                 console.error('Error fetching cart items:', error);
             }
@@ -40,10 +51,22 @@ function CategoryPage() {
         setShowPopup(false);
     }
 
-    const handleConfirmBuy = () => {
-        axios.delete(`http://localhost:8081/deletecart`)
-            .then(window.location.reload())
-            .catch(err => console.log(err));
+    const handleConfirmBuy = async () => {
+        try {
+            const currentDate = new Date().toISOString().split('T')[0];
+            const response = await axios.post('http://localhost:8081/confirmbuy', {
+                customer_id: customerData.customer_id,
+                total_price: totalPrices,
+                dates: currentDate,
+            });
+            if (response.data.success) {
+                axios.delete('http://localhost:8081/deletecart')
+                window.location.reload();
+            }
+            setShowConfirmPopup(false);
+        } catch (error) {
+            console.error('Error confirming purchase:', error);
+        }
     };
 
     const handleClosePopup = () => {

@@ -53,6 +53,12 @@ const Dashboard = () => {
                                 </Link>
                             </li>
                             <li className='w-100'>
+                                <Link to='/dashboard/orders' className='nav-link px-0 align-middle text-white'>
+                                    <i className='fs-4 bi-people ms-2'></i>
+                                    <span className='ms-2 d-none d-sm-inline'>orders</span>
+                                </Link>
+                            </li>
+                            <li className='w-100'>
                                 <Link to='/dashboard/employee' className='nav-link px-0 align-middle text-white'>
                                     <i className='fs-4 bi-people ms-2'></i>
                                     <span className='ms-2 d-none d-sm-inline'>Manage Employee</span>

@@ -133,6 +133,11 @@ function BookPage() {
 
     return (
         <div className="container">
+            <img
+          src={`http://localhost:8081/images/${data.image}`}
+          alt=""
+          className="product_img"
+        />
             <h2>{data.name}</h2>
             <p>{data.category_name}</p>
             <p>Price: {data.price}</p>

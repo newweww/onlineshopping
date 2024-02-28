@@ -24,6 +24,8 @@ import UpdateCategory from "./admin/component/Category/UpdateCategory.js";
 import Register from "./component/Register.js";
 import axios from "axios";
 import Cart from "./component/Cart.js";
+import ProfileCus from "./component/ProfileCus.js";
+import Orders from "./admin/component/Orders.js";
 
 function App() {
 
@@ -65,16 +67,19 @@ function App() {
                         <Route path="/l/home" element={<Home />} />
                         <Route path="/l/page/:product_id" element={<BookPage />} />
                         <Route path="/l/page/category/:category_name" element={<CategoryPage />} />
-                        <Route path="/l/cart" element={<Cart />} />
+                        <Route path="/l/cart/:email" element={<Cart />} />
+                        <Route path="/l/profile/:email" element={<ProfileCus/>} />
                     </Route>
                 </Routes>
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />}>
                         <Route path="/dashboard/home" element={<DashboardHome />} />
+                        <Route path="/dashboard/orders" element={<Orders/>} />
+                        <Route path="/dashboard/profile/:email" element={<Profile />} />
+
                         <Route path="/dashboard/employee" element={<Employee />} />
                         <Route path="/dashboard/add_employee" element={<AddEmployee />} />
                         <Route path="/dashboard/update_employee/:emp_id" element={<UpdateEmployee />} />
-                        <Route path="/dashboard/profile/:email" element={<Profile />} />
 
                         <Route path="/dashboard/category" element={<Category />} />
                         <Route path="/dashboard/add_category" element={<AddCategory />} />

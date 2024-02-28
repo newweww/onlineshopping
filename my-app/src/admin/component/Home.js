@@ -5,7 +5,7 @@ const DashboardHome = () => {
 
   const [adminTotal, setAdminTotal] = useState()
   const [productTotal, setProductTotal] = useState()
-  const [salaryTotal, setSalaryTotal] = useState()
+  const [saleTotal, setSaleTotal] = useState(0)
   const [admins, setAdmins] = useState([])
   const [products, setProducts] = useState([])
 
@@ -14,6 +14,7 @@ const DashboardHome = () => {
     productCount();
     AdminRecords();
     ProductRecords();
+    totalSale();
   }, [])
 
   const AdminRecords = () => {
@@ -34,6 +35,17 @@ const DashboardHome = () => {
       })
   }
 
+  const totalSale = async () => {
+    try {
+      const response = await axios.get('http://localhost:8081/auth/totalsales');
+      if (response.data.Status) {
+        setSaleTotal(response.data.TotalSales);
+      }
+    } catch (error) {
+      console.error('Error fetching total sales:', error);
+    }
+  };
+  
   const adminCount = () => {
     axios.get('http://localhost:8081/auth/admincount')
       .then(result => {
@@ -75,11 +87,11 @@ const DashboardHome = () => {
         </div>
         <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
           <div className='text-center pb-1'>
-            <h5>Salary</h5>
+            <h5>Sales</h5>
           </div>
           <hr />
           <div className=''>
-            <h5>Total:</h5>
+            <h5>Total: {saleTotal}</h5>
           </div>
         </div>
       </div>

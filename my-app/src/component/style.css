@@ -1,7 +1,23 @@
-.product_image {
+.product_img {
+  max-width: 250px;
+  max-height: 250px;
+  height: auto;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.cus_image{
   width: 250px;
   height: 250px;
+  border-radius: 50%;;
 }
+
+.mini_profile_image{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 
 .cartimg {
   width: 60px;
@@ -26,3 +42,26 @@
   border-radius: 20px;
 }
 
+.cardStyle {
+  width: 320px;
+  height: 500px;
+  margin: '0 1%';
+  display: 'flex';
+  flex-direction: 'column';
+  justify-content: 'center';
+  align-items: 'center';
+}
+
+.cardStyle:hover{
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 20px #ccc;
+}
+
+.navBtn {
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navBtn:hover {
+  background-color: rgb(227, 227, 227);
+}

@@ -10,6 +10,7 @@ import { category } from "./CategoryAction/CategoryAction.js";
 import { product } from "./ProductManage/ProductAction.js";
 import { cart } from "./CartAction/CartAction.js";
 import { employee } from "./EmployeeAction/EmployeeAction.js";
+import { customer } from "./Customer/CustomerAction.js";
 
 const app = express()
 const __filename = fileURLToPath(import.meta.url);
@@ -51,6 +52,7 @@ app.use('/', category)
 app.use('/', cart)
 app.use('/', employee)
 app.use('/register', addcustomer)
+app.use('/', customer)
 
 
 app.listen(8081, () => {

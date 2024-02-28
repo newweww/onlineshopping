@@ -97,4 +97,13 @@ router.get('/productrecords', (req, res) => {
     })
 })
 
+router.get('/totalsales', (req, res) => {
+    const sql = "SELECT sum(total_price) as totalSales from orders";
+    db.query(sql, (err, result) => {
+        if(err) return res.json({Status: false, Error:"Query Error" + err})
+        const totalSales = result[0]?.totalSales || 0;
+        return res.json({ Status: true, TotalSales: totalSales });
+    })
+})
+
 export { router as adminRouter }

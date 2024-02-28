@@ -13,6 +13,11 @@ function Card({ item }) {
         const productsData = await Product.getAllProducts();
         console.log(productsData);
         setData(productsData);
+        if (productsData.stock == 0) {
+          setData({
+            stock: "Out of Stock"
+          })
+        }
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -20,26 +25,17 @@ function Card({ item }) {
     fetchData();
   }, []);
 
-  const cardStyle = {
-    width: '100%',
-    margin: '0 1%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-
   return (
-    <div className="card inline mx-4 shadow" style={cardStyle}>
+    <div className="card inline mx-4 cardStyle" >
       <img
         src={`http://localhost:8081/images/${item.image}`}
         alt=""
-        className=""
+        className="product_img"
       />
       <div className="card-body" style={{ flex: '1' }}>
         <h5 className="card-title">{item.name}</h5>
-        <p className="card-text">{item.category_name}</p>
-        <p>Stock: {item.stock}</p>
+        <p className="card-text badge bg-secondary">{item.category_name}</p>
+        <p>Stock: {item.stock > 0 ? item.stock : <p className="badge bg-danger">Out of Stock</p>}</p>
         <p>Price: {item.price}</p>
       </div>
       <div style={{ alignSelf: 'flex-end' }}>
