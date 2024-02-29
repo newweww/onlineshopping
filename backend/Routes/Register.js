@@ -46,11 +46,11 @@ AddCustomer.post('/', (req, res) => {
 
         db.query(sql, values, (err, data) => {
             if (err) {
-                return res.status(500).json({ error: "Error inserting employee data" });
+                return res.status(500).json({ error: "Email already use" });
             }
             db.query(sql2, values2, (err2, data2) => {
                 if (err2) {
-                    return res.status(500).json({ error: "Error inserting admin data" });
+                    return res.status(500).json({ error: "Error inserting data" });
                 }
                 return res.json({ success: true });
             });

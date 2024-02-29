@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 const AddEmployee = () => {
 
+    const [error, setError] = useState(null)
     const navigate = useNavigate()
     const [values, setValues] = useState({
         name: "",
@@ -16,7 +17,7 @@ const AddEmployee = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         const formData = new FormData();
         formData.append('name', values.name);
         formData.append('lastname', values.lastname);
@@ -24,14 +25,16 @@ const AddEmployee = () => {
         formData.append('password', values.password);
         formData.append('salary', values.salary);
         formData.append('image', image);
-    
+
         axios.post('http://localhost:8081/addemployee', formData)
             .then(res => navigate('/dashboard/employee'))
             .catch(err => {
                 if (err.response && err.response.status === 400) {
                     console.log("Validation error:", err.response.data.error);
+                    setError(err.response.data.error)
                 } else {
                     console.error("Server error:", err.message);
+                    setError(err.response.data.error)
                 }
             });
     };
@@ -42,11 +45,14 @@ const AddEmployee = () => {
         setImage(e.target.files[0]);
         setValues({ ...values, image: e.target.files[0] });
     };
-    
+
 
     return (
         <div className='d-flex align-items-center justify-content-top flex-column vh-100 mt-4'>
             <div className='border px-5 py-3 d-flex align-items-center justify-content-top flex-column'>
+                <div className='text-danger'>
+                    {error && error}
+                </div>
                 <h1>Add Employee</h1>
                 <form className='w-100' onSubmit={handleSubmit}>
                     <div class="mb-3 mt-3">
