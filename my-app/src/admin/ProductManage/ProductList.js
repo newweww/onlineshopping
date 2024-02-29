@@ -45,10 +45,10 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map(product => (
+            {data.map((product, index) => (
               
               <tr key={product.product_id}>
-                <td>{product.product_id}</td>
+                <td>{index + 1}</td>
                 <td><img
                     src={`http://localhost:8081/images/${product.image}`}
                     alt=""

@@ -35,9 +35,9 @@ const CategoryList = () => {
                     </thead>
                     <tbody>
                         {
-                            data.map(category =>
+                            data.map((category, index) =>
                                 <tr key={category.category_id}>
-                                    <td>{category.category_id}</td>
+                                    <td>{index + 1}</td>
                                     <td>{category.category_name}</td>
                                     <td>
                                         <Link to={`/dashboard/updatecategory/${category.category_id}`} className='btn btn-info btn-sm me-2 '>Update</Link>

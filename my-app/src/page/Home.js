@@ -2,14 +2,27 @@ import React, { useEffect, useState } from "react";
 import Card from "../component/card";
 
 function Home() {
-    const [data, setData] = useState([]);
+    const [hotProduct, setHotProduct] = useState([]);
+    const [newProduct, setNewProduct] = useState([]);
 
     useEffect(() => {
+        hotProducts();
+        newProducts();
+    }, []);
+
+    const hotProducts = () => {
         fetch('http://localhost:8081/hot_product')
             .then(res => res.json())
-            .then(data => setData(data))
+            .then(data => setHotProduct(data))
             .catch(err => console.log(err));
-    }, []);
+    }
+
+    const newProducts = () => {
+        fetch('http://localhost:8081/new_product')
+            .then(res => res.json())
+            .then(data => setNewProduct(data))
+            .catch(err => console.log(err));
+    }
 
     const cardContainerStyle = {
         display: 'flex',
@@ -25,10 +38,18 @@ function Home() {
     };
 
     return (
-        <div className="container">
+        <div className="container" style={{ paddingBottom: '50px' }}>
             <h2 className="text-start container-fluid p-3">HOT!!!!</h2>
             <div style={cardContainerStyle}>
-                {data.map((item, index) => (
+                {hotProduct.map((item, index) => (
+                    <div key={index} style={cardStyle}>
+                        <Card item={item} />
+                    </div>
+                ))}
+            </div>
+            <h2 className="text-start container-fluid p-3">NEW!!!!</h2>
+            <div style={cardContainerStyle}>
+                {newProduct.map((item, index) => (
                     <div key={index} style={cardStyle}>
                         <Card item={item} />
                     </div>

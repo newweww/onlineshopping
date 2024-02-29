@@ -40,10 +40,10 @@ const Employee = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map(employee => (
+              {data.map((employee, index) => (
                 
                 <tr key={employee.emp_id}>
-                  <td>{employee.emp_id}</td>
+                  <td>{index + 1}</td>
                   <td><img
                       src={`http://localhost:8081/images/${employee.image}`}
                       alt=""

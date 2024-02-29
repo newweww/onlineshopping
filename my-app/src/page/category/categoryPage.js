@@ -41,7 +41,7 @@ function CategoryPage() {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ paddingBottom: '50px' }}>
       <h2 className="text-start container-fluid p-3">{category_name}</h2>
       <div style={cardContainerStyle}>
         {data.map((item, index) => (

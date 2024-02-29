@@ -26,6 +26,11 @@ function BookPage() {
     const handlebuy = async () => {
         try {
             const totalPrice = totalSelect * data.price;
+
+            if (data.stock === 0) {
+                handlePopup();
+                return; 
+            }
     
             if (data.product_id === checkData.product_id) {
                 const updatedCheckData = {
@@ -71,6 +76,20 @@ function BookPage() {
             setUpdateStock(updateStock => updateStock + 1);
         }
     }
+
+    const [showPopup, setShowPopup] = useState(false);
+
+    axios.defaults.withCredentials = true
+
+    const handlePopup = () => {
+        setShowPopup(true);
+    };
+
+    const handleConfirmPopup = () => {
+        setShowPopup(false);
+    };
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -148,7 +167,18 @@ function BookPage() {
                 <i className="bi bi-chevron-up btn" onClick={handleSelectUp}></i>
             </div>
             <button className="btn btn-success" onClick={handlebuy}>Add to Cart</button>
+            <div>
+            {showPopup && (
+                <div className="popup-overlay">
+                    <div className="popup">
+                        <p>OUT OF STOCK!</p>
+                        <button className='btn btn-success m-3' onClick={handleConfirmPopup}>OK</button>
+                    </div>
+                </div>
+            )}
+            </div>
         </div>
+        
     );
 }
 

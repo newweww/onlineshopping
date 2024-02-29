@@ -42,13 +42,13 @@ const Orders = () => {
                 <th scope="col">phone</th>
                 <th scope="col">email</th>
                 <th scope="col">total</th>
+                <th scope="col">date</th>
               </tr>
             </thead>
             <tbody>
-              {data.map(order => (
-                
+              {data.map((order, index) => ( 
                 <tr key={order.order_id}>
-                  <td>{order.order_id}</td>
+                  <td>{index + 1}</td>
                   <td><img
                       src={`http://localhost:8081/images/${order.image}`}
                       alt=""
@@ -58,6 +58,7 @@ const Orders = () => {
                   <td>{order.phone}</td>
                   <td>{order.email}</td>
                   <td>{order.total_price}</td>
+                  <td>{order.dates}</td>
                   <td>
                     <button type='button' onClick={() => handleDelete(order.order_id)} className='btn btn-danger btn-sm'>Delete</button>
                   </td>

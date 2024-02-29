@@ -48,13 +48,13 @@ const Dashboard = () => {
                         <ul className='nav nav-pill flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start' id='menu'>
                             <li className='w-100'>
                                 <Link to='/dashboard/home' className='nav-link px-0 align-middle text-white'>
-                                    <i className='fs-4 bi-speedmeter2 ms-2'></i>
+                                    <i className='fs-4 bi-info-circle ms-2'></i>
                                     <span className='ms-2 d-none d-sm-inline'>Dashboard</span>
                                 </Link>
                             </li>
                             <li className='w-100'>
                                 <Link to='/dashboard/orders' className='nav-link px-0 align-middle text-white'>
-                                    <i className='fs-4 bi-people ms-2'></i>
+                                    <i className='fs-4 bi-list-ul ms-2'></i>
                                     <span className='ms-2 d-none d-sm-inline'>orders</span>
                                 </Link>
                             </li>
@@ -66,7 +66,7 @@ const Dashboard = () => {
                             </li>
                             <li className='w-100'>
                                 <Link to='/dashboard/productlist' className='nav-link px-0 align-middle text-white'>
-                                    <i className='fs-4 bi-people ms-2'></i>
+                                    <i className='fs-4 bi-archive ms-2'></i>
                                     <span className='ms-2 d-none d-sm-inline'>Manage Product</span>
                                 </Link>
                             </li>

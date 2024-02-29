@@ -12,15 +12,7 @@ const UpdateCategory = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.put('http://localhost:8081/updatecategory/' + category_id, values)
-            .then(res => navigate('/dashboard/category'))
-            .catch(err => {
-                if (err.response && err.response.status === 400) {
-                    console.log("Validation error:", err.response.data.error);
-                } else {
-                    console.error("Server error:", err.message);
-                }
-            });
+        axios.put('http://localhost:8081/updatecategory/' + category_id, values);
     };
 
     useEffect(() => {

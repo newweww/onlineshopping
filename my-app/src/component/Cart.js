@@ -10,6 +10,7 @@ import './style.css';
 function CategoryPage() {
     const [data, setData] = useState(null);
     const [totalPrices, setTotalPrices] = useState(0);
+    const [stock, setStock] = useState(0);
     const [showConfirmPopup, setShowConfirmPopup] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [customerData, setCustomerData] = useState([])
@@ -30,7 +31,6 @@ function CategoryPage() {
                     .then(customerResponse => {
                         const customerData = customerResponse.data;
                         setCustomerData(customerData);
-                        console.log(customerData)
                     })
             } catch (error) {
                 console.error('Error fetching cart items:', error);
@@ -39,6 +39,15 @@ function CategoryPage() {
 
         fetchData();
     }, []);
+
+    const getStock = async (product_id) => {
+        const response = await axios.get(`http://localhost:8081/getproductbyid/${product_id}`);
+        const product = response.data;
+        const stock = product.stock;
+        setStock(stock);
+        return(stock);
+    }
+
     const handleConfirm = () => {
         if (data && data.length > 0) {
             setShowConfirmPopup(true);
@@ -59,15 +68,30 @@ function CategoryPage() {
                 total_price: totalPrices,
                 dates: currentDate,
             });
+    
             if (response.data.success) {
-                axios.delete('http://localhost:8081/deletecart')
+                await Promise.all(data.map(async (item) => {
+                    const stock = await getStock(item.product_id);
+                    const updatedStock = stock - item.quantity;
+    
+                    console.log(`Product ID: ${item.product_id}, Updated Stock: ${updatedStock}`);
+    
+                    await axios.post(`http://localhost:8081/stock_update/${item.product_id}`, {
+                        stock: updatedStock
+                    });
+                }));
+    
+                await axios.delete('http://localhost:8081/deletecart');
                 window.location.reload();
             }
+    
             setShowConfirmPopup(false);
         } catch (error) {
             console.error('Error confirming purchase:', error);
         }
     };
+    
+    
 
     const handleClosePopup = () => {
         setShowConfirmPopup(false);

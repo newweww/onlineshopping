@@ -59,11 +59,11 @@ product.put("/update/:product_id", (req, res) => {
     });
   });
 
-product.post("/stock_update", (req, res) => {
+product.post("/stock_update/:product_id", (req, res) => {
     const sql = "UPDATE product SET stock = ? WHERE product_id = ?";
     const values = [
       req.body.stock,
-      req.body.product_id
+      req.params.product_id
     ];
 
     db.query(sql, values, (err, data) => {
