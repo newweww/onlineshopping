@@ -1,29 +1,46 @@
-// Card.js
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "./product";
-import "./style.css"
+import "./style.css";
+import axios from "axios";
 
 function Card({ item }) {
   const [data, setData] = useState([]);
+  const [customerData, setCustomerData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const productsData = await Product.getAllProducts();
-        console.log(productsData);
         setData(productsData);
-        if (productsData.stock == 0) {
+        if (productsData.stock === 0) {
           setData({
             stock: "Out of Stock"
-          })
+          });
         }
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
     fetchData();
+    handleCustomer();
   }, []);
+
+  const handleCustomer = () => {
+    axios.get('http://localhost:8081/auth/protected-route')
+      .then(result => {
+        axios.get(`http://localhost:8081/getcustomerfromemail/${result.data.email}`)
+          .then(res => {
+            setCustomerData(res.data.customer_id);
+          })
+          .catch(error => {
+            console.error('Error fetching customer data:', error);
+          });
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+  };
 
   return (
     <div className="card inline mx-4 cardStyle" >
@@ -39,7 +56,7 @@ function Card({ item }) {
         <p>Price: {item.price}</p>
       </div>
       <div style={{ alignSelf: 'flex-end' }}>
-        <Link to={`/l/page/${item.product_id}`} className="btn btn-primary mx-2 my-2">
+        <Link to={`/l/page/${customerData}/${item.product_id}`} className="btn btn-primary mx-2 my-2">
           More
         </Link>
       </div>

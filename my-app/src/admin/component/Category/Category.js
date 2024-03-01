@@ -21,7 +21,7 @@ const CategoryList = () => {
     }
 
     return (
-        <div className='container mt-5'>
+        <div className='container mt-5' style={{ paddingBottom: '50px' }} >
             <div className='d-flex justify-content-between'>
                 <Link to="/dashboard/add_category" className="btn btn-success" >Add Category</Link>
             </div>

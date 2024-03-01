@@ -43,11 +43,15 @@ function NavBar({ handleLogout }) {
 
     fetchData();
   }, [email]);
+
   const handleCart = () => {
     axios.get('http://localhost:8081/auth/protected-route')
       .then(result => {
-        navigate(`/l/cart/${result.data.email}`)
-      })
+            axios.get(`http://localhost:8081/getcustomerfromemail/${result.data.email}`)
+            .then(res => {
+              navigate(`cart/${res.data.customer_id}`)
+            });
+          })
   }
 
   const handleProfile = () => {

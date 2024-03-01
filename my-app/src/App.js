@@ -65,9 +65,9 @@ function App() {
                 <Routes>
                     <Route path="/l" element={<Layout handleLogout={handleLogout} />}>
                         <Route path="/l/home" element={<Home />} />
-                        <Route path="/l/page/:product_id" element={<BookPage />} />
+                        <Route path="/l/page/:customer_id/:product_id" element={<BookPage />} />
                         <Route path="/l/page/category/:category_name" element={<CategoryPage />} />
-                        <Route path="/l/cart/:email" element={<Cart />} />
+                        <Route path="/l/cart/:customer_id" element={<Cart />} />
                         <Route path="/l/profile/:email" element={<ProfileCus/>} />
                     </Route>
                 </Routes>

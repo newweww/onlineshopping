@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Product from "./product";
-import Card from "./card";
 import CartItem from "./CartItem";
 import axios from "axios";
 import './style.css';
 
 
 function CategoryPage() {
+    const { customer_id } = useParams();
     const [data, setData] = useState(null);
     const [totalPrices, setTotalPrices] = useState(0);
+    const [discount, setDiscount] = useState(0);
     const [stock, setStock] = useState(0);
     const [showConfirmPopup, setShowConfirmPopup] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
@@ -18,9 +18,20 @@ function CategoryPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8081/getcart");
+                const response = await axios.get(`http://localhost:8081/getcart/${customer_id}`);
                 const cartData = response.data.cartItems;
-                const totalPrice = response.data.totalPrice;
+                let totalPrice = response.data.totalPrice;
+
+                if (totalPrice > 1000) {
+                    const discount = totalPrice * 0.1;
+                    totalPrice -= discount;
+                    setDiscount(10)
+                } else if (totalPrice > 500) {
+                    const discount = totalPrice * 0.05;
+                    totalPrice -= discount;
+                    setDiscount(5)
+                }
+
                 setData(cartData);
                 setTotalPrices(totalPrice);
 
@@ -38,14 +49,14 @@ function CategoryPage() {
         };
 
         fetchData();
-    }, []);
+    }, [customer_id]);
 
     const getStock = async (product_id) => {
         const response = await axios.get(`http://localhost:8081/getproductbyid/${product_id}`);
         const product = response.data;
         const stock = product.stock;
         setStock(stock);
-        return(stock);
+        return (stock);
     }
 
     const handleConfirm = () => {
@@ -68,30 +79,29 @@ function CategoryPage() {
                 total_price: totalPrices,
                 dates: currentDate,
             });
-    
+
             if (response.data.success) {
                 await Promise.all(data.map(async (item) => {
                     const stock = await getStock(item.product_id);
                     const updatedStock = stock - item.quantity;
-    
-                    console.log(`Product ID: ${item.product_id}, Updated Stock: ${updatedStock}`);
-    
+
+
                     await axios.post(`http://localhost:8081/stock_update/${item.product_id}`, {
                         stock: updatedStock
                     });
                 }));
-    
-                await axios.delete('http://localhost:8081/deletecart');
+
+                await axios.delete(`http://localhost:8081/deletecart/${customer_id}`);
                 window.location.reload();
             }
-    
+
             setShowConfirmPopup(false);
         } catch (error) {
             console.error('Error confirming purchase:', error);
         }
     };
-    
-    
+
+
 
     const handleClosePopup = () => {
         setShowConfirmPopup(false);
@@ -148,6 +158,7 @@ function CategoryPage() {
                     ))}
                 </div>
                 <div className="total-price-container">
+                    <p style={{ marginRight: '10px' }}>Total Discount: {discount} %</p>
                     <h2 style={{ marginRight: '10px' }}>Total Price: {totalPrices}</h2>
                     <button className="btn btn-success" style={{ fontSize: '20px', width: '300px' }} onClick={handleConfirm}>Confirm</button>
                 </div>
