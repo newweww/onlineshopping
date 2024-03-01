@@ -1,6 +1,6 @@
 .product_img {
   max-width: 250px;
-  max-height: 250px;
+  max-height: 350px;
   height: auto;
   width: 100%;
   display: block;
@@ -44,7 +44,7 @@
 
 .cardStyle {
   width: 320px;
-  height: 500px;
+  height: 600px;
   margin: '0 1%';
   display: 'flex';
   flex-direction: 'column';

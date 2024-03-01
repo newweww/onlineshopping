@@ -14,6 +14,8 @@ function CategoryPage() {
     const [showConfirmPopup, setShowConfirmPopup] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [customerData, setCustomerData] = useState([])
+    const [radio, setRadio] = useState("");
+    const [showRadioPopup, setShowRadioPopup] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,14 +24,20 @@ function CategoryPage() {
                 const cartData = response.data.cartItems;
                 let totalPrice = response.data.totalPrice;
 
+                if (totalPrice == null) {
+                    totalPrice = 0;
+                }
+
                 if (totalPrice > 1000) {
-                    const discount = totalPrice * 0.1;
-                    totalPrice -= discount;
-                    setDiscount(10)
-                } else if (totalPrice > 500) {
-                    const discount = totalPrice * 0.05;
-                    totalPrice -= discount;
-                    setDiscount(5)
+                    if (radio === 'รับที่ร้าน') {
+                        const discount = totalPrice * 0.1;
+                        totalPrice -= discount;
+                        setDiscount(10);
+                    } else if (radio === 'จัดส่ง') {
+                        const discount = totalPrice * 0.05;
+                        totalPrice -= discount;
+                        setDiscount(5);
+                    }
                 }
 
                 setData(cartData);
@@ -49,7 +57,7 @@ function CategoryPage() {
         };
 
         fetchData();
-    }, [customer_id]);
+    }, [customer_id, radio]);
 
     const getStock = async (product_id) => {
         const response = await axios.get(`http://localhost:8081/getproductbyid/${product_id}`);
@@ -60,8 +68,10 @@ function CategoryPage() {
     }
 
     const handleConfirm = () => {
-        if (data && data.length > 0) {
+        if (data && data.length > 0 && radio) {
             setShowConfirmPopup(true);
+        } else if (!radio) {
+            setShowRadioPopup(true);
         } else {
             setShowPopup(true);
         }
@@ -69,6 +79,7 @@ function CategoryPage() {
 
     const handleConfirmOk = () => {
         setShowPopup(false);
+        setShowRadioPopup(false)
     }
 
     const handleConfirmBuy = async () => {
@@ -85,7 +96,6 @@ function CategoryPage() {
                     const stock = await getStock(item.product_id);
                     const updatedStock = stock - item.quantity;
 
-
                     await axios.post(`http://localhost:8081/stock_update/${item.product_id}`, {
                         stock: updatedStock
                     });
@@ -101,10 +111,34 @@ function CategoryPage() {
         }
     };
 
-
-
     const handleClosePopup = () => {
         setShowConfirmPopup(false);
+    };
+
+    const handleRadioChange = (event) => {
+        setRadio(event.target.value);
+        updateTotalAndDiscount(data, event.target.value);
+    };
+
+    const updateTotalAndDiscount = (cartData, selectedOption) => {
+        let totalPrice = 0;
+    
+        cartData.forEach((item) => {
+            totalPrice += item.price * item.quantity;
+        });
+    
+        let newDiscount = 0;
+    
+        if (totalPrice > 1000) {
+            if (selectedOption === 'รับที่ร้าน') {
+                newDiscount = totalPrice * 0.1;
+            } else if (selectedOption === 'จัดส่ง') {
+                newDiscount = totalPrice * 0.05;
+            }
+        }
+    
+        setDiscount(newDiscount);
+        setTotalPrices(totalPrice - newDiscount);
     };
 
     if (!data) {
@@ -124,7 +158,6 @@ function CategoryPage() {
         marginBottom: "20px",
         boxSizing: "border-box",
     };
-
     return (
         <div style={{ paddingBottom: '50px' }} >
             <div className='mx-5' style={{ textAlign: 'left' }}>
@@ -160,6 +193,33 @@ function CategoryPage() {
                 <div className="total-price-container">
                     <p style={{ marginRight: '10px' }}>Total Discount: {discount} %</p>
                     <h2 style={{ marginRight: '10px' }}>Total Price: {totalPrices}</h2>
+                    <div style={{ display: 'flex', marginRight: '20px' }}>
+                        <div style={{ display: 'inline-block' }}>
+                            <input
+                                type="radio"
+                                id="pickupRadio"
+                                name="deliveryOption"
+                                value="รับที่ร้าน"
+                                style={{ width: '20px', height: '20px' }}
+                                checked={radio === "รับที่ร้าน"}
+                                onChange={handleRadioChange}
+                            />
+                            <label htmlFor="pickupRadio" style={{ marginLeft: '5px', fontSize: '20px' }}>รับที่ร้าน</label>
+                        </div>
+
+                        <div style={{ display: 'inline-block', marginLeft: '20px' }}>
+                            <input
+                                type="radio"
+                                id="deliveryRadio"
+                                name="deliveryOption"
+                                value="จัดส่ง"
+                                style={{ width: '20px', height: '20px' }}
+                                checked={radio === "จัดส่ง"}
+                                onChange={handleRadioChange}
+                            />
+                            <label htmlFor="deliveryRadio" style={{ marginLeft: '5px', fontSize: '20px' }}>จัดส่ง</label>
+                        </div>
+                    </div>
                     <button className="btn btn-success" style={{ fontSize: '20px', width: '300px' }} onClick={handleConfirm}>Confirm</button>
                 </div>
 
@@ -177,6 +237,14 @@ function CategoryPage() {
                 <div className="popup-overlay">
                     <div className="popup">
                         <p>Please add product</p>
+                        <button className='btn btn-success m-3' onClick={handleConfirmOk}>Yes</button>
+                    </div>
+                </div>
+            )}
+            {showRadioPopup && (
+                <div className="popup-overlay">
+                    <div className="popup">
+                        <p>เลือกวิธีรับสินค้า</p>
                         <button className='btn btn-success m-3' onClick={handleConfirmOk}>Yes</button>
                     </div>
                 </div>

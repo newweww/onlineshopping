@@ -16,7 +16,7 @@ function Header() {
         <React.Fragment>
             <div className="container-fluid text-start bg-dark text-white py-2 d-flex justify-content-between align-items-center">
                 <div>
-                    <h1 className="inline">NATTANAN</h1>
+                    <h1 className="inline">BookStore</h1>
                     <h6 className="inline">
                         <span className="badge bg-secondary">New</span>
                     </h6>

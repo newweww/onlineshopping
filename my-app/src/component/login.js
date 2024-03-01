@@ -32,7 +32,7 @@ function Login() {
 
     return (
         <div className='d-flex justify-content-center align-items-center vh-100 loginPage'>
-            <div className='p-3 rounded w-50 border loginForm'>
+            <div className='p-3 rounded border loginForm' style={{width: '400px'}}>
                 <div className='text-danger'>
                     {error && error}
                 </div>
