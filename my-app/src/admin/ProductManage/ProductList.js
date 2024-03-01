@@ -28,7 +28,7 @@ const ProductList = () => {
   };
 
   return (
-    <div className='container mt-5 '>
+    <div className='container mt-5' style={{ paddingBottom: '50px' }} >
       <div className='d-flex justify-content-between'>
         <Link to="/dashboard/create" className="btn btn-success">Add Book</Link>
       </div>

@@ -32,6 +32,7 @@ function Card({ item }) {
         axios.get(`http://localhost:8081/getcustomerfromemail/${result.data.email}`)
           .then(res => {
             setCustomerData(res.data.customer_id);
+            console.log(setCustomerData)
           })
           .catch(error => {
             console.error('Error fetching customer data:', error);
