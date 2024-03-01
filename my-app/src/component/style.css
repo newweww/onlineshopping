@@ -1,4 +1,12 @@
 .product_img {
+  max-width: 500px;
+  max-height: 600px;
+  height: auto;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.product_img_card {
   max-width: 250px;
   max-height: 350px;
   height: auto;

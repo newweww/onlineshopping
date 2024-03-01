@@ -32,7 +32,6 @@ function Card({ item }) {
         axios.get(`http://localhost:8081/getcustomerfromemail/${result.data.email}`)
           .then(res => {
             setCustomerData(res.data.customer_id);
-            console.log(setCustomerData)
           })
           .catch(error => {
             console.error('Error fetching customer data:', error);
@@ -48,7 +47,7 @@ function Card({ item }) {
       <img
         src={`http://localhost:8081/images/${item.image}`}
         alt=""
-        className="product_img"
+        className="product_img_card"
       />
       <div className="card-body" style={{ flex: '1' }}>
         <h5 className="card-title">{item.name}</h5>

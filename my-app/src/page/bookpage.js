@@ -236,35 +236,39 @@ function BookPage() {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ marginRight: '20px' }} className="border">
             <img
-                src={`http://localhost:8081/images/${data.image}`}
-                alt=""
-                className="product_img"
+              src={`http://localhost:8081/images/${data.image}`}
+              alt=""
+              className="product_img"
             />
+          </div>
+          <div style={{ flex: 1 }} className="border p-5 shadow">
             <h2>{data.name}</h2>
-            <p>{data.category_name}</p>
+            <p className="card-text badge bg-secondary">{data.category_name}</p>
+            <p>Stock: {data.stock > 0 ? data.stock : <p className="badge bg-danger">Out of Stock</p>}</p>
             <p>Price: {data.price}</p>
-            <p>Stock: {data.stock}</p>
-            <div className="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5vh' }}>
-                <i className="bi bi-chevron-down btn" onClick={handleSelectDown}></i>
-                <h5>{totalSelect}</h5>
-                <i className="bi bi-chevron-up btn" onClick={handleSelectUp}></i>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5vh' }}>
+              <i className="bi bi-chevron-down btn" onClick={handleSelectDown}></i>
+              <h5>{totalSelect}</h5>
+              <i className="bi bi-chevron-up btn" onClick={handleSelectUp}></i>
             </div>
             <button className="btn btn-success" onClick={handlebuy}>Add to Cart</button>
             <div>
-                {showPopup && (
-                    <div className="popup-overlay">
-                        <div className="popup">
-                            <p>OUT OF STOCK!</p>
-                            <button className='btn btn-success m-3' onClick={handleConfirmPopup}>OK</button>
-                        </div>
-                    </div>
-                )}
+              {showPopup && (
+                <div className="popup-overlay">
+                  <div className="popup">
+                    <p>OUT OF STOCK!</p>
+                    <button className='btn btn-success m-3' onClick={handleConfirmPopup}>OK</button>
+                  </div>
+                </div>
+              )}
             </div>
+          </div>
         </div>
-
-    );
+      );
+      
 }
 
 export default BookPage;
