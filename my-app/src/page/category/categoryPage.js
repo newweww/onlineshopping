@@ -29,7 +29,7 @@ function CategoryPage() {
 
   const cardContainerStyle = {
     display: "flex",
-    flexWrap: "wrap", 
+    flexWrap: "wrap",
     justifyContent: "space-between",
     marginTop: "20px",
   };
@@ -37,18 +37,20 @@ function CategoryPage() {
   const cardStyle = {
     flex: "0 0 calc(30% - 20px)",
     marginBottom: "20px",
-    boxSizing: "border-box", 
+    boxSizing: "border-box",
   };
 
   return (
-    <div className="container" style={{ paddingBottom: '50px' }}>
-      <h2 className="text-start container-fluid p-3">{category_name}</h2>
-      <div style={cardContainerStyle}>
-        {data.map((item, index) => (
-          <div key={index} style={cardStyle}>
-            <Card item={item} />
-          </div>
-        ))}
+    <div className="container border shadow my-3" style={{ paddingBottom: '50px' }}>
+      <h1 className="text-start container-fluid p-3">{category_name}</h1>
+      <div className="px-5">
+        <div style={cardContainerStyle}>
+          {data.map((item, index) => (
+            <div key={index} style={cardStyle}>
+              <Card item={item} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

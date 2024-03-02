@@ -52,7 +52,7 @@
 
 .cardStyle {
   width: 320px;
-  height: 520px;
+  height: 530px;
   margin: '0 1%';
   display: 'flex';
   flex-direction: 'column';
@@ -61,8 +61,8 @@
 }
 
 .cardStyle:hover{
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 20px #ccc;
+  border: 2px solid #ccc;
+  box-shadow: 1px 1px 15px #ccc;
 }
 
 .navBtn {

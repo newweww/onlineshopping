@@ -55,7 +55,7 @@ const AddCustomer = () => {
                 <div className='text-danger'>
                     {error && error}
                 </div>
-                <h1>Add Employee</h1>
+                <h1>Register</h1>
                 <form className='w-100' onSubmit={handleSubmit}>
                     <div class="mb-3 mt-3">
                         <label for="name" class="form-label">Name:</label>

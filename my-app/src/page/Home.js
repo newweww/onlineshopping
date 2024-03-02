@@ -38,24 +38,30 @@ function Home() {
     };
 
     return (
-        <div className="container" style={{ paddingBottom: '50px' }}>
-            <h2 className="text-start container-fluid p-3">HOT!!!!</h2>
-            <div style={cardContainerStyle}>
-                {hotProduct.map((item, index) => (
-                    <div key={index} style={cardStyle}>
-                        <Card item={item} />
-                    </div>
-                ))}
+        <div className="container border shadow my-3" style={{ paddingBottom: '50px' }}>
+            <h1 className="text-start container-fluid p-3 my-3">HOT!!!!</h1>
+            <div className="px-5">
+                <div style={cardContainerStyle}>
+                    {hotProduct.map((item, index) => (
+                        <div key={index} style={cardStyle}>
+                            <Card item={item} />
+                        </div>
+                    ))}
+                </div>
             </div>
-            <h2 className="text-start container-fluid p-3">NEW!!!!</h2>
-            <div style={cardContainerStyle}>
-                {newProduct.map((item, index) => (
-                    <div key={index} style={cardStyle}>
-                        <Card item={item} />
-                    </div>
-                ))}
+            <hr style={{ textAlign: 'left', width: '100%' }} />
+            <h1 className="text-start container-fluid p-3 my-3">NEW!!!!</h1>
+            <div className="px-5">
+                <div style={cardContainerStyle}>
+                    {newProduct.map((item, index) => (
+                        <div key={index} style={cardStyle}>
+                            <Card item={item} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
+
     );
 }
 

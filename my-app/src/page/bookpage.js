@@ -30,19 +30,19 @@ function BookPage() {
         try {
             checkDatafc();
             const totalPrice = totalSelect * data.price;
-    
+
             if (data.stock === 0) {
                 handlePopup();
                 return;
             }
-    
+
             const updatedCheckData = {
                 quantity: checkData.quantity + totalSelect,
                 total_price: checkData.total_price + totalPrice,
                 product_id: checkData.product_id,
                 customer_id: checkData.customer_id
             };
-    
+
             if (values.customer_id !== checkData.customer_id) {
                 console.log(values.customer_id)
                 console.log(checkData.customer_id)
@@ -56,22 +56,23 @@ function BookPage() {
                         product_id: data.product_id,
                         customer_id: values.customer_id,
                     };
-    
+
                     console.log("Creating new item:", cartItem);
-    
+
                     await axios.post('http://localhost:8081/addcart', cartItem);
                 } else {
                     console.log(checkData.product_id);
                     console.log(data.product_id);
-    
+
                     await axios.put(`http://localhost:8081/updatecart/${values.customer_id}/${data.product_id}`, updatedCheckData);
                 }
             } else {
                 console.log("Updating existing item:", updatedCheckData);
-    
-                    await axios.put(`http://localhost:8081/updatecart/${values.customer_id}/${data.product_id}`, updatedCheckData);
+
+                await axios.put(`http://localhost:8081/updatecart/${values.customer_id}/${data.product_id}`, updatedCheckData);
             }
-    
+            window.location.reload();
+
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 console.log("Validation error:", error.response.data.error);
@@ -80,8 +81,8 @@ function BookPage() {
             }
         }
     };
-    
-    
+
+
     const handleSelectUp = () => {
         if (data && totalSelect < data.stock) {
             setTotalSelect(totalSelect => totalSelect + 1);
@@ -117,7 +118,7 @@ function BookPage() {
         const result = authResponse.data;
 
         const customerResponse = await axios.get(`http://localhost:8081/getcustomerfromemail/${result.email}`);
-                const customerData = customerResponse.data;
+        const customerData = customerResponse.data;
         try {
             const response2 = await axios.get(`http://localhost:8081/getcartitembyproductid/${customer_id}/${product_id}`);
             const cartData = response2.data;
@@ -236,39 +237,50 @@ function BookPage() {
     }
 
     return (
-        <div className="container" style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ marginRight: '20px' }} className="border">
-            <img
-              src={`http://localhost:8081/images/${data.image}`}
-              alt=""
-              className="product_img"
-            />
-          </div>
-          <div style={{ flex: 1 }} className="border p-5 shadow">
-            <h2>{data.name}</h2>
-            <p className="card-text badge bg-secondary">{data.category_name}</p>
-            <p>Stock: {data.stock > 0 ? data.stock : <p className="badge bg-danger">Out of Stock</p>}</p>
-            <p>Price: {data.price}</p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5vh' }}>
-              <i className="bi bi-chevron-down btn" onClick={handleSelectDown}></i>
-              <h5>{totalSelect}</h5>
-              <i className="bi bi-chevron-up btn" onClick={handleSelectUp}></i>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '50vh' }}>
+            <div style={{ marginRight: '20px' }} className="border">
+                <img
+                    src={`http://localhost:8081/images/${data.image}`}
+                    alt=""
+                    className="product_img"
+                />
             </div>
-            <button className="btn btn-success" onClick={handlebuy}>Add to Cart</button>
-            <div>
-              {showPopup && (
-                <div className="popup-overlay">
-                  <div className="popup">
-                    <p>OUT OF STOCK!</p>
-                    <button className='btn btn-success m-3' onClick={handleConfirmPopup}>OK</button>
-                  </div>
+            <div style={{ width: '500px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }} className="border p-5 shadow">
+                <h2>{data.name}</h2>
+                <hr style={{ textAlign: 'left', width: '100%' }} />
+                <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <h5 style={{ marginRight: '5px' }}>Category : </h5>
+                    <p className="card-text badge bg-secondary" style={{ verticalAlign: 'top', fontSize: '15px' }}>{data.category_name}</p>
                 </div>
-              )}
+                <br />
+                <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                    <h5 style={{ marginRight: '5px' }}>Stock :</h5>
+                    {data.stock > 0 ? <p className="badge bg-secondary" style={{ verticalAlign: 'top', fontSize: '15px' }}>  {data.stock} </p> : <p className="badge bg-danger" style={{ verticalAlign: 'top', fontSize: '15px' }}>Out of Stock</p>}
+                </div>
+                <hr style={{ textAlign: 'left', width: '100%' }} />
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', width: '400px' }}>
+                    <h1>฿ {data.price}</h1>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5vh' }}>
+                        <i className="bi bi-chevron-down btn" onClick={handleSelectDown}></i>
+                        <h5 style={{ margin: '0 1px' }}>{totalSelect}</h5>
+                        <i className="bi bi-chevron-up btn" onClick={handleSelectUp}></i>
+                        <button className="btn btn-success" onClick={handlebuy}>Add to Cart</button>
+                    </div>
+                </div>
+                <div>
+                    {showPopup && (
+                        <div className="popup-overlay">
+                            <div className="popup">
+                                <p>OUT OF STOCK!</p>
+                                <button className='btn btn-success m-3' onClick={handleConfirmPopup}>OK</button>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
-          </div>
         </div>
-      );
-      
+    );
+
 }
 
 export default BookPage;
