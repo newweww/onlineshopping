@@ -60,6 +60,16 @@ function NavBar({ handleLogout }) {
         navigate(`/l/profile/${result.data.email}`)
       })
   }
+  
+  const handleOrder = () => {
+    axios.get('http://localhost:8081/auth/protected-route')
+      .then(result => {
+            axios.get(`http://localhost:8081/getcustomerfromemail/${result.data.email}`)
+            .then(res => {
+              navigate(`orders/${res.data.customer_id}`)
+            });
+          })
+  }
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -86,6 +96,11 @@ function NavBar({ handleLogout }) {
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
+            <Nav className="ms-auto my-2 my-lg-0">
+            <Nav.Link as={CustomLink} className="navBtn" onClick={handleOrder} style={{ display: 'flex', alignItems: 'center' }}>
+              <span className='ms-2 d-none d-sm-inline' style={{ fontSize: '20px' }}>Orders</span>
+            </Nav.Link>
+          </Nav>
             <Nav className="ms-auto my-2 my-lg-0">
             <Nav.Link as={CustomLink} className="navBtn" onClick={handleLogout} style={{ display: 'flex', alignItems: 'center' }}>
               <span className='ms-2 d-none d-sm-inline' style={{ fontSize: '20px' }}>Logout</span>

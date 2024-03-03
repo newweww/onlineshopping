@@ -64,7 +64,7 @@ cart.post('/confirmbuy', (req, res) => {
 
   db.query(sql, values, (err, data) => {
     if (err) {
-      return res.status(500).json({ error: "Error inserting employee data" });
+      return res.status(500).json({ error: "Error inserting data" });
     }
     return res.json({ success: true });
   })

@@ -26,6 +26,7 @@ import axios from "axios";
 import Cart from "./component/Cart.js";
 import ProfileCus from "./component/ProfileCus.js";
 import Orders from "./admin/component/Orders.js";
+import Invoice from "./component/Invoice.js";
 
 function App() {
 
@@ -67,6 +68,7 @@ function App() {
                         <Route path="/l/home" element={<Home />} />
                         <Route path="/l/page/:customer_id/:product_id" element={<BookPage />} />
                         <Route path="/l/page/category/:category_name" element={<CategoryPage />} />
+                        <Route path="/l/orders/:customer_id" element={<Invoice />} />
                         <Route path="/l/cart/:customer_id" element={<Cart />} />
                         <Route path="/l/profile/:email" element={<ProfileCus/>} />
                     </Route>

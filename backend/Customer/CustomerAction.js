@@ -11,6 +11,16 @@ customer.get('/order', (req, res) => {
     })
 })
 
+customer.get('/order/:email', (req, res) => {
+  const email = req.params.email;
+  const sql = "SELECT * FROM orders o join customer c on c.customer_id = o.customer_id WHERE email = ?";
+  db.query(sql,[email], (err, data) => {
+      if(err) return res.json(err);
+      return res.json(data);
+  })
+})
+
+
 customer.delete("/deleteorder/:order_id", (req, res) => {
     const sql = "delete from orders where order_id = ? ";
     const id = req.params.order_id

@@ -122,13 +122,13 @@ function CategoryPage() {
 
     const updateTotalAndDiscount = (cartData, selectedOption) => {
         let totalPrice = 0;
-    
+
         cartData.forEach((item) => {
             totalPrice += item.price * item.quantity;
         });
-    
+
         let newDiscount = 0;
-    
+
         if (totalPrice > 1000) {
             if (selectedOption === 'รับที่ร้าน') {
                 newDiscount = totalPrice * 0.1;
@@ -136,7 +136,7 @@ function CategoryPage() {
                 newDiscount = totalPrice * 0.05;
             }
         }
-    
+
         setDiscount(newDiscount);
         setTotalPrices(totalPrice - newDiscount);
     };
@@ -158,31 +158,33 @@ function CategoryPage() {
         marginBottom: "20px",
         boxSizing: "border-box",
     };
+    
     return (
         <div style={{ paddingBottom: '50px' }} >
             <div className='mx-5' style={{ textAlign: 'left' }}>
-                <h3>Cart</h3>
-                <div className="card inline mx-4 shadow" style={cardStyle}>
-                    <div className="card-body" style={{ flex: '92%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <div style={{ flex: '8%', marginLeft: '10px' }}>
-                            <h6>Image</h6>
-                        </div>
-                        <div style={{ flex: '15%', marginLeft: '10px' }}>
-                            <h6>Name</h6>
-                        </div>
-                        <div style={{ flex: '20%' }}>
-                            <h6>Price</h6>
-                        </div>
-                        <div style={{ flex: '20%' }}>
-                            <h6>Quantity</h6>
-                        </div>
-                        <div style={{ flex: '20%', marginRight: '50px' }}>
-                            <h6>Total</h6>
+                <div>
+                    <h1>Cart</h1>
+                    <div className="card inline mx-4 shadow" style={cardStyle}>
+                        <div className="card-body" style={{ flex: '92%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <div style={{ flex: '8%', marginLeft: '10px' }}>
+                                <h6>Image</h6>
+                            </div>
+                            <div style={{ flex: '15%', marginLeft: '10px' }}>
+                                <h6>Name</h6>
+                            </div>
+                            <div style={{ flex: '20%' }}>
+                                <h6>Price</h6>
+                            </div>
+                            <div style={{ flex: '20%' }}>
+                                <h6>Quantity</h6>
+                            </div>
+                            <div style={{ flex: '20%', marginRight: '50px' }}>
+                                <h6>Total</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <hr />
-                <div />
                 <div style={cardContainerStyle}>
                     {data.map((item, index) => (
                         <div key={index} style={cardStyle}>
