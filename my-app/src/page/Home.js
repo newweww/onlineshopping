@@ -32,9 +32,9 @@ function Home() {
     };
 
     const cardStyle = {
-        flex: '0 0 calc(30% - 20px)', // 30% width with a margin of 20px
+        flex: '0 0 calc(30% - 20px)',
         marginBottom: '20px',
-        boxSizing: 'border-box', // Include padding and border in the width
+        boxSizing: 'border-box', 
     };
 
     return (

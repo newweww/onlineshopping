@@ -12,7 +12,8 @@ const UpdateCategory = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.put('http://localhost:8081/updatecategory/' + category_id, values);
+        axios.put('http://localhost:8081/updatecategory/' + category_id, values)
+        .then(res => navigate('/dashboard/category'))
     };
 
     useEffect(() => {

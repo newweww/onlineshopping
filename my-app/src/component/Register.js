@@ -75,11 +75,11 @@ const AddCustomer = () => {
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="text" class="form-control" id="email" placeholder="Enter Email" onChange={(e) => setValues({ ...values, email: e.target.value })} name="email" />
+                        <input type="email" class="form-control" id="email" placeholder="Enter Email" onChange={(e) => setValues({ ...values, email: e.target.value })} name="email" />
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="password" class="form-label">Password:</label>
-                        <input type="text" class="form-control" id="password" placeholder="Enter Password" onChange={(e) => setValues({ ...values, password: e.target.value })} name="password" />
+                        <input type="password" class="form-control" id="password" placeholder="Enter Password" onChange={(e) => setValues({ ...values, password: e.target.value })} name="password" />
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="image" class="form-label">Select Image:</label>

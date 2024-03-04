@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Product from "./product";
 import "./style.css";
 import axios from "axios";
@@ -7,6 +7,7 @@ import axios from "axios";
 function Card({ item }) {
   const [data, setData] = useState([]);
   const [customerData, setCustomerData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,23 +43,32 @@ function Card({ item }) {
       });
   };
 
+  const handleClick = () => {
+    navigate(`/l/page/${customerData}/${item.product_id}`);
+  }
+
+
   return (
-    <div className="card inline mx-4 cardStyle" >
-      <img
-        src={`http://localhost:8081/images/${item.image}`}
-        alt=""
-        className="product_img_card"
-      />
-      <div className="card-body" style={{ flex: '1' }}>
-        <h5 className="card-title">{item.name}</h5>
-        <p className="card-text badge bg-secondary">{item.category_name}</p>
-        <p>Stock: {item.stock > 0 ? item.stock : <p className="badge bg-danger">Out of Stock</p>}</p>
-        <p>Price: {item.price}</p>
-      </div>
-      <div style={{ alignSelf: 'flex-end' }}>
-        <Link to={`/l/page/${customerData}/${item.product_id}`} className="btn btn-primary mx-2 my-2">
-          More
-        </Link>
+    <div className="card inline mx-4 cardStyle p-2" onClick={ handleClick }>
+        <img
+          src={`http://localhost:8081/images/${item.image}`}
+          alt=""
+          className="product_img_card"
+        />
+        <div className="card-body" style={{ flex: '1' }}>
+          <h4 className="card-title">{item.name}</h4>
+          <p className="card-text badge bg-secondary">{item.category_name}</p>
+          <p style={{ fontSize: '20px' }}>Stock: {item.stock > 0 ? item.stock : <span className="badge bg-danger">Out of Stock</span>}</p>
+        </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', height: '100%' }}>
+        <div className="mx-2">
+          <h2>฿ {item.price}</h2>
+        </div>
+        <div style={{ alignSelf: 'flex-end' }}>
+          <button className="btn btn-outline-dark mx-2 my-2" >
+            Click for more
+          </button>
+        </div>
       </div>
     </div>
   );
